@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ishtar Branding | Ram Salim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="global.css">
+
+    <style type="text/tailwindcss">
+        @layer components {
+            .ishtar-h3 {
+                @apply text-4xl md:text-[3.5rem] font-medium mb-6 tracking-tight leading-[0.9] md:leading-[0.85];
+            }
+            
+            .ishtar-p {
+                @apply text-[20px] leading-[28px];
+            }
+
+            .ishtar-text-col {
+                @apply w-full md:max-w-[300px];
+            }
+        }
+
+        nav {
+            margin-bottom: 0 !important;
+        }
+    </style>
+</head>
+<body class="antialiased bg-white text-[#203021]"> 
+
+    <!-- 1. The Navbar Layer -->
+    <div class="relative z-[100]">
+        <nav id="nav-placeholder" data-page="ishtar" dir="ltr"></nav>
+    </div>
+
+    <!-- 2. The Hero Section -->
+    <main class="relative z-0 w-full">
+        <img src="assets/ishtar/ishtar-hero.webp" alt="Ishtar Fashion Models" class="w-full h-auto block">
+        <div class="absolute inset-0 flex items-center justify-center p-8 md:p-16 pointer-events-none">
+            <img src="assets/ishtar/ishtar-hero.svg" alt="Ishtar Graphic Overlay" class="w-full max-w-5xl h-auto drop-shadow-2xl">
+        </div>
+    </main>
+
+    <!-- 3. The Text Section -->
+    <section class="relative flex flex-col justify-center items-center py-24 md:py-32 w-full">
+        <div class="px-8 md:px-16 w-full max-w-6xl">
+            <p class="ishtar-p">
+                <strong>ISHTAR</strong> is a fashion brand providing a platform for Middle Eastern design. It promotes local Mizrahi art, drawing from the rich visual traditions of the founders' heritage. Located in Jerusalem’s Mahane-Yehuda market—the historic site of the legendary Morduch restaurant—the choice of location reflects the shared values of Ishtar and Morduch: preserving tradition through original arts and crafts.
+            </p>
+        </div>
+        <div class="absolute bottom-0 left-8 right-8 md:left-16 md:right-16 h-px bg-[#203021] opacity-30"></div>
+    </section>
+
+    <!-- 4. Logo Evolution Section -->
+    <section class="relative flex flex-col justify-center items-center py-24 md:py-32 w-full">
+        <div class="w-full max-w-6xl px-8 md:px-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center mb-16 md:mb-24">
+                <div class="ishtar-text-col">
+                    <h3 class="ishtar-h3">The Logo</h3>
+                    <p class="ishtar-p">We referenced the Hamsa, recreating it in a vegetal form inspired by vine leaves</p>
+                </div>
+                <div class="flex justify-start md:justify-end">
+                    <img src="assets/ishtar/ishtar-step-1.svg" alt="Hamsa to Vegetal Evolution" class="w-full max-w-md h-auto">
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+                <div class="ishtar-text-col">
+                    <h3 class="ishtar-h3">Abstraction</h3>
+                    <p class="ishtar-p">Distilling the organic Hamsa symbol into a sharp, modern silhouette for the final brand identity</p>
+                </div>
+                <div class="flex justify-start md:justify-end">
+                    <img src="assets/ishtar/ishtar-step-2.svg" alt="Vegetal to Abstract Evolution" class="w-full max-w-md h-auto">
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-8 right-8 md:left-16 md:right-16 h-px bg-[#203021] opacity-30"></div>
+    </section>
+
+    <!-- 5. Typography and Characters Section -->
+    <section class="relative flex flex-col justify-center items-center py-24 md:py-32 w-full">
+        <div class="w-full max-w-6xl px-8 md:px-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center mb-16 md:mb-24">
+                <div class="ishtar-text-col">
+                    <h3 class="ishtar-h3">Logotype</h3>
+                    <p class="ishtar-p">The logotype draws inspiration from the structural strokes of ancient Babylonian cuneiform writing</p>
+                </div>
+                <div class="flex justify-start md:justify-end">
+                    <img src="assets/ishtar/ishtar-step-3.svg" alt="Cuneiform Logotype Inspiration" class="w-full max-w-md h-auto">
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+                <div class="ishtar-text-col">
+                    <h3 class="ishtar-h3">Characters</h3>
+                    <p class="ishtar-p">The characters of the Ishtar logotype were meticulously integrated into the abstracted symbol, merging language and icon</p>
+                </div>
+                <div class="flex justify-start md:justify-end">
+                    <img src="assets/ishtar/ishtar-step-4.svg" alt="Characters Integration into Symbol" class="w-full max-w-md h-auto">
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-8 right-8 md:left-16 md:right-16 h-px bg-[#203021] opacity-30"></div>
+    </section>
+
+    <!-- 6. Fluidity Section -->
+    <section class="relative flex flex-col justify-center items-center py-24 md:py-32 w-full">
+        <div class="w-full max-w-6xl px-8 md:px-16">
+            <div class="mb-12 md:mb-16 w-full">
+                <h3 class="ishtar-h3">Fluidity</h3>
+                <p class="ishtar-p">The symbol is designed to morph and adapt to any dimension, reinforcing a versatile and fluid brand identity that resonates with everyone, everywhere</p>
+            </div>
+            <div class="flex flex-col gap-6 w-full">
+                <div class="w-full bg-[#F2FFD1] py-8 flex justify-center items-center rounded-lg">
+                    <img src="assets/ishtar/ishtar-size-1.svg" alt="Ishtar Morph 1" class="h-24 md:h-40 w-auto object-contain">
+                </div>
+                <div class="w-full bg-[#F2FFD1] py-8 flex justify-center items-center rounded-lg">
+                    <img src="assets/ishtar/ishtar-size-2.svg" alt="Ishtar Morph 2" class="h-24 md:h-40 w-auto object-contain">
+                </div>
+                <div class="w-full bg-[#F2FFD1] py-8 flex justify-center items-center rounded-lg">
+                    <img src="assets/ishtar/ishtar-size-3.svg" alt="Ishtar Morph 3" class="h-24 md:h-40 w-auto object-contain">
+                </div>
+                <div class="w-full bg-[#F2FFD1] py-8 flex justify-center items-center rounded-lg">
+                    <img src="assets/ishtar/ishtar-size-4.svg" alt="Ishtar Morph 4" class="h-24 md:h-40 w-auto object-contain">
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-8 right-8 md:left-16 md:right-16 h-px bg-[#203021] opacity-30"></div>
+    </section>
+
+    <!-- 7. Early Concepts Section -->
+    <section class="relative flex flex-col justify-center items-center py-24 md:py-32 w-full">
+        <div class="w-full max-w-6xl px-8 md:px-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12 md:mb-16 items-center">
+                <div>
+                    <h3 class="ishtar-h3 mb-0">Early<br>Concepts</h3>
+                </div>
+                <div>
+                    <p class="ishtar-p">These additional sketches showcase the progress, iterations and choises that were taken throughout the branding process.</p>
+                </div>
+                <div>
+                    <p class="ishtar-p">We wanted to make sure the legacy of Morduch alongside its traditional Mizrahi heritage were reflected in Ishtar’s identity.</p>
+                </div>
+            </div>
+            <div class="w-full bg-[#F8F8F8] p-12 md:p-20 rounded-lg flex justify-center items-center">
+                <img src="assets/ishtar/ishtar-early-concepts.svg" alt="Early Concept Sketches" class="w-full h-auto max-w-4xl">
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-8 right-8 md:left-16 md:right-16 h-px bg-[#203021] opacity-30"></div>
+    </section>
+
+    <!-- 8. Face Closeup & Lockups Section -->
+    <section class="relative w-full overflow-hidden">
+        <!-- Photography Base -->
+        <img src="assets/ishtar/face_closeup.webp" alt="Ishtar Editorial Photography" class="w-full h-auto block">
+        
+        <!-- Graphics Overlay -->
+        <div class="absolute inset-0 flex items-center justify-center p-8 md:p-16 pointer-events-none">
+            <img src="assets/ishtar/lockups.svg" alt="Ishtar Brand Lockups" class="w-full max-w-3xl h-auto">
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script>
+    // 1. Fetch and inject the Navbar
+    fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+            const navPlaceholder = document.getElementById('nav-placeholder');
+            navPlaceholder.innerHTML = data;
+            
+            // Get the page name from the attribute and inject it
+            const pageName = navPlaceholder.getAttribute('data-page');
+            if (pageName) {
+                document.getElementById('nav-current-page').textContent = pageName;
+            }
+        });
+        // Wait for BOTH the nav fetch and the custom fonts to finish loading
+    Promise.all([
+        fetch('nav.html')
+            .then(response => response.text())
+            .then(data => {
+                const navPlaceholder = document.getElementById('nav-placeholder');
+                navPlaceholder.innerHTML = data;
+                
+                // Inject the current page name
+                const pageName = navPlaceholder.getAttribute('data-page');
+                if (pageName && document.getElementById('nav-current-page')) {
+                    document.getElementById('nav-current-page').textContent = pageName;
+                }
+            }),
+        document.fonts.ready // This is the magic line that waits for Khilazon!
+    ]).then(() => {
+        // Now that the DOM is fully built, automate the CSS variables
+        const rootStyles = getComputedStyle(document.documentElement);
+        document.querySelectorAll('[data-val]').forEach(span => {
+            const varName = span.getAttribute('data-val');
+            span.textContent = rootStyles.getPropertyValue(varName).trim();
+        });
+
+        // Everything is ready. Fade the page in!
+        document.body.classList.add('loaded');
+    });
+</script>
+</body>
+</html>

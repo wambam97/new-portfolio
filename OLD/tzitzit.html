@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tzitzit | Ram Salim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Link to the Global CSS architecture -->
+    <link rel="stylesheet" href="global.css">
+
+    <style>
+        /* Tzitzit-specific override: Force the gallery background to be black */
+        .gallery-container {
+            background-color: #000000 !important;
+        }
+    </style>
+</head>
+<body class="theme-inter bg-white text-black antialiased">
+
+    <!-- The actual NAV element acts as the placeholder, fixing the sticky issue -->
+    <nav id="nav-placeholder" data-page="tzitzit" dir="ltr"></nav>
+
+   <div class="site-container">
+        <header class="mb-16 md:mb-24">
+            <h1 style="font-size: var(--font-project-title);" class="project-title title-underline">
+                Tzitzit
+            </h1>
+            <div class="flex flex-wrap gap-2 mt-8">
+                <span class="project-tag">Typography</span>
+                <span class="project-tag">Information Design</span>
+                <span class="project-tag">Systematic Design</span>
+                <span class="project-tag">Visual Research</span>
+                <span class="project-tag">Diagrammatic Drawing</span>
+                <span class="project-tag">Generative Systems</span>
+            </div>
+        </header>
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-6 mb-20">
+            <div style="font-size: var(--font-body);" class="leading-relaxed text-gray-900">
+                Gemtaria of the Tzitzit is a visual and structural study of the ancient art of tying ritual fringes. The project explores the intersection of sacred tradition and typographic form, transforming a physical act of religious observance into a systematic visual language rooted in Jewish mysticism and heritage.
+            </div>
+            <div style="font-size: var(--font-body);" class="leading-relaxed text-gray-900">
+                Focusing specifically on the Sephardi tying tradition, the research highlights how the number of loops in each knot corresponds to Hebrew letters through Gematria. This realization—that the knot is already a carrier of linguistic data—served as the foundation for a new typographic system.
+            </div>
+            <div style="font-size: var(--font-body);" class="leading-relaxed text-gray-900">
+                The physical structure of the knots was translated into a comprehensive graphic alphabet from Alef to Tav. Using a precise diagrammatic approach, each character was designed to maintain a direct visual and mathematical link to the original ritual ties, bridging the gap between fiber and font.
+            </div>
+            <div style="font-size: var(--font-body);" class="leading-relaxed text-gray-900">
+                To demonstrate the system's utility, the new alphabet was applied to create "encoded ornamentations." These complex, ornate frames function as both decorative elements and hidden texts, where the traditional aesthetic of Jewish manuscripts is reimagined through modern, systematic design logic.
+            </div>
+        </section>
+
+        <!-- Dynamic Gallery Container -->
+        <section id="dynamic-gallery" class="gallery-container"></section>
+
+        <footer class="pb-12 opacity-100 text-xs tracking-widest uppercase">
+            <p>Ram Salim © 2026</p>
+        </footer>
+    </div>
+
+    <!-- Scripts: Navbar Injection and Dynamic Image Gallery -->
+    <script>
+        // 1. Fetch and inject the Navbar
+        fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+            const navPlaceholder = document.getElementById('nav-placeholder');
+            navPlaceholder.innerHTML = data;
+            
+            // Get the page name from the attribute and inject it
+            const pageName = navPlaceholder.getAttribute('data-page');
+            if (pageName) {
+                document.getElementById('nav-current-page').textContent = pageName;
+            }
+        });
+
+        // 2. Dynamic Image Gallery Generator
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleryContainer = document.getElementById('dynamic-gallery');
+            
+            // Auto-generates an array of numbers from 1 to 26
+            const imageNumbers = Array.from({length: 26}, (_, i) => i + 1);
+
+            imageNumbers.forEach(num => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'gallery-item';
+                
+                const img = document.createElement('img');
+                img.src = `assets/tzitzit/${num}.jpg`;
+                img.alt = `Tzitzit Document ${num}`;
+                
+                itemDiv.appendChild(img);
+                galleryContainer.appendChild(itemDiv);
+            });
+        });
+        // Wait for BOTH the nav fetch and the custom fonts to finish loading
+    Promise.all([
+        fetch('nav.html')
+            .then(response => response.text())
+            .then(data => {
+                const navPlaceholder = document.getElementById('nav-placeholder');
+                navPlaceholder.innerHTML = data;
+                
+                // Inject the current page name
+                const pageName = navPlaceholder.getAttribute('data-page');
+                if (pageName && document.getElementById('nav-current-page')) {
+                    document.getElementById('nav-current-page').textContent = pageName;
+                }
+            }),
+        document.fonts.ready // This is the magic line that waits for Khilazon!
+    ]).then(() => {
+        // Now that the DOM is fully built, automate the CSS variables
+        const rootStyles = getComputedStyle(document.documentElement);
+        document.querySelectorAll('[data-val]').forEach(span => {
+            const varName = span.getAttribute('data-val');
+            span.textContent = rootStyles.getPropertyValue(varName).trim();
+        });
+
+        // Everything is ready. Fade the page in!
+        document.body.classList.add('loaded');
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+/* =====================================================
+   nav.css — Portfolio header & modal for ishtar.html
+   Scoped exclusively to .global-header and #projects-modal.
+   Safe to link alongside ishtar.css — no bare element
+   selectors, no collisions with Ishtar's own layout.
+   ===================================================== */
+
+:root {
+    --nav-gap:    2.5vw;
+    --nav-px:     6vw;
+    --nav-py:     48px; 
+    --nav-pb:     16px; 
+    --nav-mb:     48px; 
+    --nav-fs:     16px;
+    --nav-offset: calc(var(--nav-py) + var(--nav-fs) + var(--nav-pb) + var(--nav-mb));
+}
+
+/* ── 1. THE GLOBAL HEADER ── */
+header.global-header {
+    display: grid !important;
+    grid-template-columns: repeat(8, 1fr) !important;
+    column-gap: var(--nav-gap) !important;
+    align-items: baseline !important;
+
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: var(--nav-py) var(--nav-px) var(--nav-pb) var(--nav-px) !important;
+    margin: 0 0 var(--nav-mb) 0 !important;
+    z-index: 2000 !important;
+
+    border-bottom: 1px solid black !important;
+    background: white !important;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+header.global-header::before,
+header.global-header::after {
+    display: none !important;
+}
+
+header.global-header.nav-hidden {
+    transform: translateY(-100%) !important;
+}
+
+header.global-header .logo {
+    grid-column: 1 / 3 !important;
+    font-weight: bold !important;
+    font-size: var(--nav-fs) !important;
+    line-height: 1 !important;
+    letter-spacing: -0.02em !important;
+    color: black !important;
+    text-decoration: none !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    width: auto !important;
+    display: block !important;
+    filter: none !important;
+}
+
+header.global-header nav {
+    grid-column: 5 / 9 !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    column-gap: var(--nav-gap) !important;
+    font-size: var(--nav-fs) !important;
+    line-height: 1 !important;
+    text-transform: uppercase !important;
+    letter-spacing: normal !important;
+}
+
+header.global-header nav a {
+    color: black !important;
+    text-decoration: none !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+/* ── 2. MODAL-OPEN OVERRIDES ── */
+body.modal-open header.global-header {
+    mix-blend-mode: normal !important;
+    border-bottom-color: #000 !important;
+    background: transparent !important;
+}
+
+body.modal-open header.global-header::before {
+    display: block !important;
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important; left: 0 !important;
+    width: 100% !important; height: 100% !important;
+    background-color: #e5e5e5 !important;
+    z-index: -1 !important;
+}
+
+body.modal-open header.global-header .logo,
+body.modal-open header.global-header nav a {
+    color: #111 !important;
+}
+
+/* ── 3. THE PROJECTS MODAL ── */
+#projects-modal {
+    position: fixed !important;
+    top: 0 !important; left: 0 !important;
+    width: 100vw !important; height: 100vh !important;
+    background-color: #e5e5e5 !important;
+    z-index: 1990 !important;
+    overflow-y: auto !important;
+    padding: calc(var(--nav-offset) + 32px) var(--nav-px) 128px var(--nav-px) !important;
+    box-sizing: border-box !important;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    color: #111 !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+#projects-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+body.modal-open {
+    overflow: hidden !important;
+}
+
+/* ── 4. PROJECT GRID INSIDE THE MODAL ── */
+#modal-grid-container main {
+    padding-bottom: 48px !important;
+}
+
+#modal-grid-container .projects-grid {
+    display: grid !important;
+    grid-template-columns: repeat(8, 1fr) !important;
+    column-gap: var(--nav-gap) !important;
+    row-gap: 80px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#modal-grid-container .project-card {
+    grid-column: span 2 !important;
+    text-decoration: none !important;
+    color: #111 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+#modal-grid-container .project-header {
+    margin-bottom: 12px !important;
+}
+
+#modal-grid-container .project-num,
+#modal-grid-container .project-title {
+    display: block !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    line-height: 1 !important;
+    letter-spacing: -0.02em !important;
+}
+
+#modal-grid-container .project-title {
+    text-decoration: underline !important;
+    text-decoration-thickness: 1.5px !important;
+    text-underline-offset: 4px !important;
+}
+
+#modal-grid-container .project-media {
+    width: 100% !important;
+    aspect-ratio: 2.2 / 1 !important;
+    background-color: #000 !important;
+    margin-bottom: 12px !important;
+}
+
+#modal-grid-container .project-media img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+#modal-grid-container .project-desc {
+    font-size: 12px !important;
+    margin: 0 !important;
+    line-height: 1.3 !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    letter-spacing: normal !important;
+}
+
+/* ── 5. MOBILE ── */
+@media (max-width: 900px) {
+    header.global-header {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: space-between !important;
+        gap: 24px !important; 
+    }
+
+    header.global-header nav {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 16px 32px !important; 
+    }
+
+    #modal-grid-container .projects-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 64px !important; 
+    }
+}

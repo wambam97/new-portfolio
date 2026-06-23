@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khilazon - Ram Salim</title>
+    <link rel="stylesheet" href="project.css">
+    
+    <style>
+        /* Project-Specific Fonts */
+        @font-face {
+            font-family: 'Khilazon Regular';
+            src: url('assets/fonts/khilazon_regular.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Khilazon Cursive';
+            src: url('assets/fonts/khilazon_cursive.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Arbel Hagilda';
+            src: url('assets/fonts/ArbelHagilda_Regular%20[Menukad].otf') format('opentype'); 
+        }
+
+        /* Revert Title Override */
+        .khilazon-project-title {
+            font-family: 'Khilazon Regular', sans-serif;
+            font-weight: normal;
+            text-align: left; 
+            /* Removed the negative margin from here */
+        }
+
+        /* Adjust Type Tester to push it down */
+        .type-huge {
+            font-size: clamp(90px, 15vw, 15vw); 
+            letter-spacing: -0.02em;
+            line-height: 0.8; 
+            margin-top: 0; /* Changed from -0.15em to 0. Tweak to 0.02em if it needs a microscopic nudge down */
+            margin-bottom: -0.05em;
+        }
+
+        .type-large {
+            font-size: clamp(32px, 4vw, 60px);
+            line-height: 1.1;
+        }
+
+        .font-regular {
+            font-family: 'Khilazon Regular', sans-serif;
+        }
+
+        .font-cursive {
+            font-family: 'Khilazon Cursive', sans-serif;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Nav Placeholder -->
+    <div id="nav-placeholder"></div>
+
+    <main class="grid layout-reversed">
+        
+        <div class="info-pane">
+            <div class="top-content">
+                <!-- Title aligned left -->
+                <h1 class="khilazon-project-title" dir="rtl">חילזון</h1>
+                
+                <div class="specs-list">
+                    <span>Type Design</span>
+                    <span>Glyph Engineering</span>
+                    <span>Hebrew Type</span>
+                    <span>Display Typeface</span>
+                    <span>Experimental Type</span>
+                </div>
+                
+                <div class="description">
+                    <p>Commissioned for the Spring 2027 bridal collection, this editorial magazine serves as a comprehensive documentation of the design process. It bridges physical craftsmanship and editorial structure, translating intricate physical gowns into a cohesive print experience.</p>
+                    <p>The magazine made its professional debut in April 2026 at New York Fashion Week. It served as a primary touchpoint for international clients and industry leaders, acting as both a visual showcase and a vital communication tool for one of Israel's most prominent voices in global couture.</p>
+                    
+                    <a href="mailto:ram.salim.studio@gmail.com?subject=בקשה לקבל את חילזון" class="cta-button">בקשו את חילזון</a>
+                </div>
+            </div>
+            
+            <div class="copyright desktop-copy">
+                RAM SALIM © 2026
+            </div>
+        </div>
+
+        <div class="main-content" dir="rtl">
+            <hr class="type-separator mobile-only">
+            <div class="type-tester-row type-huge font-regular" contenteditable="true" spellcheck="false">כתבו כאן</div>
+            
+            <hr class="type-separator">
+            
+            <div class="type-tester-row type-large font-regular" contenteditable="true" spellcheck="false">חילזון הוא גופן ששאב השראה בצורה מפתיעה מכתבי יד יהודים פרסיים וקיבל תפנית מעניינת ומעוקלת. חילזון הוא גופן ששאב השראה.</div>
+            
+            <hr class="type-separator">
+            
+            <div class="type-tester-row type-huge font-cursive" contenteditable="true" spellcheck="false">כתבו כאן</div>
+            
+            <hr class="type-separator">
+            
+            <div class="type-tester-row type-large font-cursive" contenteditable="true" spellcheck="false">חילזון הוא גופן ששאב השראה בצורה מפתיעה מכתבי יד יהודים פרסיים וקיבל תפנית מעניינת ומעוקלת. חילזון הוא גופן ששאב השראה.</div>
+        </div>
+        
+        <div class="copyright mobile-copy">
+            RAM SALIM © 2026
+        </div>
+    </main>
+
+    <!-- Header Fetch -->
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').outerHTML = data;
+            })
+            .catch(error => console.error('Error loading the header:', error));
+    </script>
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three Scripts | Ram Salim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Link to the Global CSS -->
+    <link rel="stylesheet" href="global.css">
+</head>
+<body class="theme-inter theme-pastel bg-white text-black antialiased">
+
+    <!-- The actual NAV element acts as the placeholder, fixing the sticky issue -->
+    <nav id="nav-placeholder" data-page="3-scripts" dir="ltr"></nav>
+
+    <div class="site-container">
+        <header class="mb-16 md:mb-24">
+            <h1 style="font-size: var(--font-project-title);" class="project-title title-underline">
+                Three Scripts
+            </h1>
+            <div class="flex flex-wrap gap-2 mt-8">
+                <span class="project-tag">Type Design</span>
+                <span class="project-tag">Hebrew Typography</span>
+                <span class="project-tag">Editorial</span>
+                <span class="project-tag">Book Design</span>
+                <span class="project-tag">Speculative Design</span>
+                <span class="project-tag">Award Winning</span>
+            </div>
+        </header>
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-6 mb-20">
+            <div style="font-size: var(--font-body);" class="leading-relaxed text-gray-900">
+                Three Scripts is an award-winning typographic project exploring three new Hebrew writing systems. It investigates the "word" through three distinct lenses: as a magical force, a primordial concept, or a digital code. This study pushes the boundaries of how meaning and form coexist within the Hebrew language.
+            </div>
+            <div style="font-size: var(--font-body);" class="leading-relaxed text-gray-900">
+                Each conceptual pillar translates into a unique design logic. One system is mathematically structured via gematria values; another draws from the raw, organic roots of Proto-Canaanite script; and the third is a rigid, modern construction based on the structural constraints of Unicode.
+            </div>
+            <div style="font-size: var(--font-body);" class="leading-relaxed text-gray-900">
+                The project is presented in three phases: the Book of Explanations documents the research and foundations; the Specimen Booklet showcases the aesthetic development of the typefaces; and the Book of Designs demonstrates their application in contemporary visual contexts.
+            </div>
+            <div style="font-size: var(--font-body);" class="leading-relaxed text-gray-900">
+                The project was honored with the AlefAlefAlef Design Award for 2025 graduates, recognizing excellence in Hebrew typography. It is also preserved in the Madaf.art archive, a digital project dedicated to the curation and preservation of local Israeli design.
+            </div>
+        </section>
+
+        <!-- Dynamic Gallery Container -->
+        <section id="dynamic-gallery" class="gallery-container"></section>
+
+        <footer class="pb-12 opacity-100 text-xs tracking-widest uppercase">
+            <p>Ram Salim © 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        // 1. Dynamic Image Gallery Generator (Runs immediately)
+        const galleryContainer = document.getElementById('dynamic-gallery');
+        if (galleryContainer) {
+            const imageNumbers = [
+                537, 538, 541, 542, 543, 547, 548, 549, 550, 551, 552, 
+                554, 555, 556, 557, 558, 559, 560, 561, 562, 564, 565, 566, 568
+            ];
+
+            imageNumbers.sort((a, b) => a - b).forEach(num => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'gallery-item';
+                
+                const img = document.createElement('img');
+                img.src = `assets/three-scripts/MadafAug25_-${num}.jpg`;
+                img.alt = `Three Scripts Document ${num}`;
+                
+                itemDiv.appendChild(img);
+                galleryContainer.appendChild(itemDiv);
+            });
+        }
+
+        // 2. The Fail-Safe Loading Routine (Nav + Fonts + Fade In)
+        Promise.all([
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    const navPlaceholder = document.getElementById('nav-placeholder');
+                    if (navPlaceholder) {
+                        navPlaceholder.innerHTML = data;
+                        
+                        const pageName = navPlaceholder.getAttribute('data-page');
+                        const currentPageSpan = document.getElementById('nav-current-page');
+                        if (pageName && currentPageSpan) {
+                            currentPageSpan.textContent = pageName;
+                        }
+                    }
+                })
+                .catch(err => console.log('Nav loading error:', err)),
+                
+            document.fonts.ready
+        ])
+        .finally(() => {
+            // ALWAYS fade the page in when done!
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>

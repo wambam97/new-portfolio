@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISHTAR - Mobile</title>
+    <style>
+        :root {
+            --brand-orange: #F04429;
+            --bg-dark: #000;
+            --text-dark: #191616;
+            --text-light: #fff;
+            --gray-bg: #f4f4f4;
+            --border-dark: #333;
+            --tab-height: 48px; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-dark); }
+
+        /* Hero Container - 100vh Split */
+        .hero-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .hero {
+            flex-grow: 1; 
+            width: 100%;
+            height: 0; 
+        }
+        .hero img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            object-position: center top;
+            display: block; 
+        }
+
+        /* Hero Strip */
+        .hero-strip { 
+            flex-shrink: 0; 
+            background: var(--bg-dark); color: var(--text-light); 
+            padding: 20px 20px calc(var(--tab-height) + 15px) 20px; 
+            font-size: 0.75rem; 
+            text-transform: uppercase;
+            line-height: 1.3;
+        }
+        .info-grid-top {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+            padding-bottom: 15px; border-bottom: 1px solid var(--border-dark); margin-bottom: 15px;
+        }
+        .info-grid-bottom {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+        }
+        .split-col {
+            display: flex; justify-content: space-between; gap: 10px;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .logo-wrapper {
+            width: 100%;
+        }
+        .logo-wrapper img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+        }
+
+        /* Chapter Layout */
+        .chapter-container {
+            margin-top: calc(-1 * var(--tab-height)); 
+            position: relative;
+        }
+
+        .chapter-container-notab {
+            position: relative;
+        }
+        
+        .tab {
+            width: 50%;
+            height: var(--tab-height); 
+            display: flex;
+            align-items: center; 
+            padding: 0 20px;
+            font-size: 1rem;
+            border: 1px solid var(--text-dark);
+            border-bottom: none;
+            border-left: none;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            margin-left: 0;
+            font-weight: 500;
+            box-sizing: border-box; 
+        }
+
+        .chapter-body {
+            /* Higher radius applied to all main corners */
+            border-top-right-radius: 40px;
+            /* border-bottom-left-radius: 40px; */
+            border-bottom-right-radius: 40px;
+            padding-top: 15px;
+            padding-bottom: 60px; /* Buffer for overlapping tabs */
+            overflow: hidden; /* This cuts the gallery square exactly to the radius */
+        }
+
+        /* Colors per section */
+        .story-section .tab { background-color: var(--brand-orange); }
+        .story-section .chapter-body { background-color: var(--brand-orange); }
+        
+        .symbols-track .tab { background-color: var(--text-light); color: var(--text-dark); }
+        .symbols-track .chapter-body { background-color: var(--text-light); color: var(--text-dark); padding-bottom: 0; }
+
+        .brand-seal-section .tab { background-color: var(--text-light); color: var(--text-dark); }
+        .brand-seal-section .chapter-body { background-color: var(--text-light); color: var(--text-dark); }
+
+        .typography-palette-section .tab { background-color: var(--bg-dark); color: var(--text-light); border-color: var(--border-dark); }
+        .typography-palette-section .chapter-body { background-color: var(--bg-dark); color: var(--text-light); }
+        .typography-palette-section .chapter-header { border-bottom-color: var(--border-dark); }
+
+        /* Typography */
+        .chapter-header {
+            font-weight: 700; letter-spacing: -0.05em;
+            padding: 0 20px 20px; border-bottom: 1px solid var(--text-dark);
+            font-size: 3.2rem;
+        }
+
+        .content-block { 
+            display: flex; gap: 15px; padding: 20px; 
+            font-size: 1rem; line-height: 1.3; font-weight: 400;
+        }
+        .content-block .index { 
+            font-weight: 700; font-size: 1rem; white-space: nowrap; 
+        }
+
+        /* === Scroll-Jacking Logic ===
+           JS intercepts wheel/touch events the moment the card's top
+           hits the viewport top, freezes native scroll, and cycles the
+           evolution images on each gesture tick. Once every image has
+           been shown, native scroll is released and the next section
+           (which already peeks out below the card) scrolls in normally.
+           No surplus track height needed — no black void. */
+        .symbols-track,
+        .brand-seal-section {
+            position: relative;
+            /* Natural height — no 300vh/200vh surplus */
+        }
+        .sticky-wrapper {
+            position: sticky;
+            top: 0;
+            /* Natural card height — no forced 100vh */
+            display: flex; flex-direction: column;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            overflow: hidden;
+        }
+
+        /* Logo Evolution Box */
+        .evolution-container {
+            width: 100%;
+            aspect-ratio: 1; /* Locks the gallery to a perfect square */
+            background: #F8F6F4;
+            margin: 0; 
+            display: flex; align-items: center; justify-content: center;
+            padding: 40px;
+            flex-shrink: 0;
+        }
+
+        /* Logo Evolution Box */
+        .evolution-container {
+            flex-grow: 1; 
+            background: #F8F6F4;
+            margin: 0; /* Stretches edge-to-edge */
+            width: 100%;
+            display: flex; align-items: center; justify-content: center;
+            padding: 40px;
+        }
+        
+        .evolution-stage { 
+            width: 70%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: opacity 0.3s ease; 
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <div class="hero-container">
+        <section class="hero">
+            <img src="assets/ishtar/hero-3.png" alt="ISHTAR Look">
+        </section>
+
+        <section class="hero-strip">
+            <div class="info-grid-top">
+                <div class="logo-wrapper">
+                    <img src="assets/ishtar/frame-logo.svg" alt="Ishtar Logo">
+                </div>
+                <div class="split-col">
+                    <div>ISHTAR LTD<br>Brand and Identity<br>SS 2023</div>
+                    <div class="text-right">SINCE<br>AUGUST<br>1982</div>
+                </div>
+            </div>
+            <div class="info-grid-bottom">
+                <div class="split-col">
+                    <div>LOCAL<br>SUSTAINABLE<br>FASHION</div>
+                    <div class="text-right">MADE IN PEACE<br>IN THE MIDDLE<br>EAST</div>
+                </div>
+                <div class="split-col">
+                    <div>HQ<br>AGRIPAS ST 70<br>JLM</div>
+                    <div class="text-right">COORD<br>31°47'04"N<br>35°12'42"E</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="chapter-container story-section">
+        <div class="tab">[ CHAPTER 01 ]</div>
+        <div class="chapter-body">
+            <h2 class="chapter-header">01.The Story</h2>
+            <div class="content-block">
+                <div class="index">[ 0 ]</div>
+                <p><strong>ISHTAR</strong> is a Jerusalem-founded fashion house built on the visual identities of the Middle East. By translating regional traditions into contemporary design, the brand serves as a platform for Mizrahi art—preserving heritage through strict craftsmanship and sustainable form.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter-container symbols-track" id="symbols-track">
+        <div class="sticky-wrapper">
+            <div class="tab">[ CHAPTER 02 ]</div>
+            <div class="chapter-body">
+                <h2 class="chapter-header">02.Symbols</h2>
+                <div class="content-block">
+                    <div class="index">[ 0 ]</div>
+                    <p>Rooted in regional visual traditions, the logo integrates the hamsa with a fluid, grapevine-inspired motif. The final identity distills this fusion into a stark, fragmented geometric icon, balancing historical symbolism with contemporary edge.</p>
+                </div>
+                
+                <div class="evolution-container">
+                    <img src="assets/ishtar/symbols-1.svg" alt="Logo Evolution" class="evolution-stage" id="logo-render">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter-container-notab brand-seal-section" id="seal-track">
+        <div class="sticky-wrapper">
+            <!-- <div class="tab">[ CHAPTER 02 ]</div> -->
+            <div class="chapter-body" style="padding-bottom: 0;">
+                <h2 class="chapter-header">02.1.Brand Seal</h2>
+                <div class="content-block">
+                    <div class="index">[ 0 ]</div>
+                    <p>The seal preserves the symbol's organic origins. While the primary logo distills the hamsa and grapevine motif into a sharp contemporary glyph, the seal retains the fluid, vegetal qualities of the original drawing. Used as a secondary emblem, it serves as a mark of origin, reinforcing the brand's connection to craft, place, and heritage.</p>
+                </div>
+                
+                <div class="evolution-container">
+                    <img src="assets/ishtar/symbols-2.svg" alt="Brand Seal Evolution" class="evolution-stage" id="seal-render">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter-container-notab logotype-section">
+            <div class="chapter-body" style="background-color: var(--text-light); color: var(--text-dark); padding-bottom: 0;">
+                <h2 class="chapter-header">02.2.Logotype</h2>
+                
+                <div class="content-block" style="padding-bottom: 5px;">
+                    <div class="index">[ 0 ]</div>
+                    <p>The logotype draws inspiration from the structural strokes of ancient Babylonian cuneiform writing</p>
+                </div>
+                <div class="content-block" style="padding-top: 5px; padding-bottom: 40px;">
+                    <div class="index">[ 0 ]</div>
+                    <p>The characters of the Ishtar logotype were meticulously integrated into the abstracted symbol, merging language and icon</p>
+                </div>
+                
+                <div class="evolution-container" style="margin-bottom: 20px;">
+                    <img src="assets/ishtar/logotype-1.svg" alt="Cuneiform Logotype" style="width: 100%; height: auto; display: block;">
+                </div>
+                
+                <div class="evolution-container">
+                    <img src="assets/ishtar/logotype-2-mobile.svg" alt="Logotype Integration" style="width: 60%; height: auto; display: block;">
+                </div>
+            </div>
+        </section>
+
+        <!-- 02.2. Fluidity — needs a tall track so the scroll animation has room -->
+        <section id="fluidity-section" style="height: 250vh; position: relative;">
+            <div class="chapter-container-notab" style="position: sticky; top: 0;">
+                <div class="chapter-body" style="background-color: var(--text-light); color: var(--text-dark); padding-bottom: 0;">
+                    <h2 class="chapter-header">02.2.Fluidity</h2>
+                    
+                    <div class="content-block">
+                        <div class="index">[ 0 ]</div>
+                        <p>The symbol is designed to morph and adapt to any dimension, reinforcing a versatile and fluid brand identity that resonates with everyone, everywhere</p>
+                    </div>
+                    
+                    <!-- Grey background container spanning edge-to-edge -->
+                    <div class="evolution-container" style="background: #F8F6F4; border-radius: 0; padding: 60px 40px; margin-bottom: 0;">
+                        <!-- Wrapper set to 60% width -->
+                        <div style="width: 60%; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
+                            <img src="assets/ishtar/symbols-3.svg" alt="Fluid Symbol" id="fluid-symbol-mobile" style="width: 100%; height: auto; transform-origin: center; will-change: transform;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- 03. Typography & Palette -->
+    <section class="chapter-container typography-palette-section">
+        <div class="tab">[ CHAPTER 03 ]</div>
+        <div class="chapter-body">
+            <h2 class="chapter-header">03.Typography &amp;Palette</h2>
+
+            <div class="content-block">
+                <div class="index">[ a ]</div>
+                <p>Helvetica provides the foundational structure for the Ishtar visual identity. Chosen for its neutrality and exceptional legibility, this sans-serif typeface ensures that primary messaging remains clear and accessible.</p>
+            </div>
+
+            <div class="content-block" style="padding-bottom: 0;">
+                <div class="index">[ b ]</div>
+                <p></p>
+            </div>
+
+            <!-- Colour palette swatches -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 16px 20px 60px;">
+                <div style="background: #191616; aspect-ratio: 2/3;"></div>
+                <div style="background: #F04429; aspect-ratio: 2/3;"></div>
+                <div style="background:#f4f4f4; aspect-ratio: 2/3"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // ============================================================
+        // SCROLL JAIL — freeze native scroll when a section's card
+        // reaches the top of the viewport, cycle evolution images on
+        // each user gesture, then release so the next section rises in
+        // naturally from below (it already peeks below the card).
+        // ============================================================
+
+        class ScrollJail {
+            constructor({ trackEl, images, renderEl, pxPerStep = 90 }) {
+                this.trackEl  = trackEl;
+                this.images   = images;
+                this.renderEl = renderEl;
+                this.pxPerStep = pxPerStep;
+                this.index    = 0;
+                this.done     = false;
+                this.debt     = 0;
+                // Initialise with first image
+                if (renderEl) renderEl.src = images[0];
+            }
+
+            // True while the card top is at the viewport top and we haven't
+            // finished cycling yet.
+            isEngaged() {
+                if (this.done) return false;
+                const r = this.trackEl.getBoundingClientRect();
+                return r.top <= 1 && r.bottom > 0;
+            }
+
+            // Feed pixel-delta from a swipe/wheel gesture.
+            // Returns true once all images have been shown (release signal).
+            feed(delta) {
+                if (delta <= 0 || this.done) return this.done;
+                this.debt += delta;
+                while (this.debt >= this.pxPerStep) {
+                    this.debt -= this.pxPerStep;
+                    this.index++;
+                    if (this.index >= this.images.length) {
+                        this.index = this.images.length - 1;
+                        this.done  = true;
+                        this.debt  = 0;
+                        break;
+                    }
+                    if (this.renderEl) {
+                        this.renderEl.src = this.images[this.index];
+                    }
+                }
+                return this.done;
+            }
+
+            // Reset when the user scrolls back above the section
+            reset() {
+                this.index = 0;
+                this.done  = false;
+                this.debt  = 0;
+                if (this.renderEl) this.renderEl.src = this.images[0];
+            }
+        }
+
+        // ── Define jails ──────────────────────────────────────────────
+        const jails = [
+            new ScrollJail({
+                trackEl:  document.getElementById('symbols-track'),
+                images:   ['assets/ishtar/symbols-1.svg',
+                           'assets/ishtar/symbols-2.svg',
+                           'assets/ishtar/symbols-3.svg'],
+                renderEl: document.getElementById('logo-render'),
+                pxPerStep: 100
+            }),
+            new ScrollJail({
+                trackEl:  document.getElementById('seal-track'),
+                images:   ['assets/ishtar/symbols-2.svg',
+                           'assets/ishtar/seal.svg'],
+                renderEl: document.getElementById('seal-render'),
+                pxPerStep: 100
+            })
+        ];
+
+        function getActiveJail() {
+            for (const j of jails) { if (j.isEngaged()) return j; }
+            return null;
+        }
+
+        // ── Wheel (desktop) ───────────────────────────────────────────
+        window.addEventListener('wheel', (e) => {
+            const jail = getActiveJail();
+            if (jail) {
+                e.preventDefault();
+                jail.feed(e.deltaY);
+            }
+        }, { passive: false });
+
+        // ── Touch (mobile) ────────────────────────────────────────────
+        let _touchY = 0;
+        window.addEventListener('touchstart', (e) => {
+            _touchY = e.touches[0].clientY;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+            const jail = getActiveJail();
+            if (jail) {
+                e.preventDefault();
+                const dy = _touchY - e.touches[0].clientY;
+                _touchY  = e.touches[0].clientY;
+                jail.feed(dy);
+            }
+        }, { passive: false });
+
+        // ── Native scroll: reset jails when user scrolls back up ──────
+        window.addEventListener('scroll', () => {
+            for (const j of jails) {
+                if (j.trackEl.getBoundingClientRect().top > 50) j.reset();
+            }
+
+            // Fluidity section — scale animation (unchanged)
+            const fluidSection = document.getElementById('fluidity-section');
+            const fluidSymbol  = document.getElementById('fluid-symbol-mobile');
+            if (fluidSection && fluidSymbol) {
+                const r = fluidSection.getBoundingClientRect();
+                const maxScroll = r.height - window.innerHeight;
+                let p = r.top <= 0 ? Math.abs(r.top) / maxScroll : 0;
+                p = Math.max(0, Math.min(1, p));
+                fluidSymbol.style.transform =
+                    `scale(${1 + 0.5 * p}, ${1 - 0.4 * p})`;
+            }
+        });
+    </script>
+</body>
+</html>

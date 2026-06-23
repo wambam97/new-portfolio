@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khilazon 3D - Ram Salim</title>
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+    <div id="nav-placeholder"></div>
+
+    <main class="grid">
+        <div class="info-pane">
+            <div class="top-content">
+                <h1>Khilazon 3D</h1>
+                
+                <div class="specs-list">
+                    <span>Art Direction</span>
+                    <span>Type Design</span>
+                    <span>Hebrew Typography</span>
+                    <span>3D Modeling</span>
+                    <span>Motion Design</span>
+                    <span>Creative Coding</span>
+                </div>
+                
+                <div class="description">
+                    <p>Based on the Khilazon typeface, this experimental typographic tool reinterprets the font within a 3D environment. By allowing users to rotate the letterforms, it unlocks endless visual representations for every character in the Hebrew alphabet. The live tool is fully interactive, and the accompanying gallery showcases the project's promotional video materials.</p>
+                    <p>The application was developed in JavaScript with the assistance of generative AI tools, helping transition the project from its initial concept to a fully functional state.</p>
+                </div>
+            </div>
+            
+            <div class="copyright desktop-copy">
+                RAM SALIM © 2026
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="tool-wrapper">
+                <button id="fs-btn" class="icon-fs-btn" aria-label="Fullscreen">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                    </svg>
+                </button>
+
+                <iframe 
+                    src="https://khilazon-3d.vercel.app/" 
+                    class="khilazon-3d-tool" 
+                    title="Khilazon 3D"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <!-- 2-Column Gallery -->
+            <div class="gallery-2col">
+                <video src="assets/khilazon-3d/1.mp4" autoplay loop muted playsinline></video>
+                <video src="assets/khilazon-3d/2.mp4" autoplay loop muted playsinline></video>
+                <video src="assets/khilazon-3d/3.mp4" autoplay loop muted playsinline></video>
+                <video src="assets/khilazon-3d/4.mp4" autoplay loop muted playsinline></video>
+                <img src="assets/khilazon-3d/5.png" alt="Khilazon 3D 5">
+                <img src="assets/khilazon-3d/6.png" alt="Khilazon 3D 6">
+            </div>
+        </div>
+        
+        <div class="copyright mobile-copy">
+            RAM SALIM © 2026
+        </div>
+    </main>
+
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').outerHTML = data;
+            })
+            .catch(error => console.error('Error loading the header:', error));
+    </script>
+
+    <script src="main.js"></script>
+    <script>
+        const fsBtn = document.getElementById('fs-btn');
+        const toolWrapper = document.querySelector('.tool-wrapper');
+        const toolIframe = document.querySelector('.khilazon-3d-tool');
+
+        // Listens for the iframe to finish downloading its assets
+        toolIframe.addEventListener('load', () => {
+            toolWrapper.classList.add('loaded');
+        });
+
+        // Fullscreen logic
+        fsBtn.addEventListener('click', () => {
+            if (toolIframe.requestFullscreen) {
+                toolIframe.requestFullscreen();
+            } else if (toolIframe.webkitRequestFullscreen) { /* Safari */
+                toolIframe.webkitRequestFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ishtar Project</title>
+<style>
+  /* =========================================
+     VARIABLES & BASE STYLES
+  ========================================= */
+  :root {
+    --col1: 180fr;
+    --col2: 510fr;
+    --col3: 510fr;
+    --col4: 180fr;
+    --gap: 0.778vw; 
+    --max-w: 90%; 
+  }
+
+  html {
+    font-size: 0.6vw; 
+    height: 100%;
+    scroll-snap-type: y mandatory; 
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: #191616; 
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem; 
+    font-weight: 400; 
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.05rem; 
+    line-height: 1.4;
+  }
+
+  b, strong { font-weight: 700; }
+  .text-right { text-align: right; }
+  
+  .split-col {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  
+
+  /* =========================================
+     GLOBAL STICKY FRAME
+  ========================================= */
+  .sticky-frame {
+    position: sticky;
+    top: 0; 
+    height: 100vh;
+    margin-bottom: -100vh; /* Pulls the chapter content up to perfectly overlap */
+    z-index: 100;
+    pointer-events: none; 
+    display: flex;
+    justify-content: center;
+    transition: color 0.5s ease;
+  }
+
+  .frame-pointer-auto { pointer-events: auto; }
+
+  .top-bar {
+    border-bottom: 1px solid;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    text-transform: uppercase;
+    transition: border-color 0.5s ease;
+    position: relative; /* Required to anchor the blur zone */
+  }
+
+  .bottom-bar {
+    border-top: 1px solid;
+    padding-top: 3rem;
+    transition: border-color 0.5s ease;
+  }
+
+  .logo {
+    width: 100%;
+    display: block;
+    transition: filter 0.5s ease;
+  }
+
+  .top-bar {
+    border-bottom: 1px solid;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    text-transform: uppercase;
+    transition: border-color 0.5s ease;
+    position: relative;
+  }
+
+  .bottom-bar {
+    border-top: 1px solid;
+    padding-top: 3rem;
+    transition: border-color 0.5s ease;
+    position: relative;
+  }
+
+  /* Frame Color States (Completely clear backgrounds) */
+  .frame-white {
+    color: #FAFAFD;
+  }
+  .frame-white .top-bar, .frame-white .bottom-bar {
+    border-color: #FAFAFD;
+  }
+  .frame-white .logo {
+    filter: none;
+  }
+
+  .frame-black {
+    color: #191616;
+  }
+  .frame-black .top-bar, .frame-black .bottom-bar {
+    border-color: #191616;
+  }
+  .frame-black .logo {
+    filter: brightness(0.1); 
+  }
+
+  /* =========================================
+     LAYOUT CONTAINERS
+  ========================================= */
+  .snap-section {
+    width: 100%;
+    height: 100vh; 
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    justify-content: center;
+    background-color: transparent; 
+  }
+
+  .text-light { color: #FAFAFD; }
+  .text-dark { color: #191616; }
+
+  .bg-black { background-color: #191616; }
+  .bg-red { background-color: #F04429; }
+  .bg-white { background-color: #FAFAFD; }
+
+  /* The In-Between Gradient Seam */
+  .gradient-transition {
+    width: 100%;
+    height: 50vh; 
+    background: linear-gradient(to bottom, #F04429 0%, #BFFDFF 50%, #FAFAFD 100%);
+  }
+
+  .desktop-container {
+    width: 100%;
+    max-width: var(--max-w);
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2.4vw 1.7vw; 
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 1413px) {
+    .desktop-container {
+      height: auto; 
+      aspect-ratio: 1413 / 900; 
+      margin: auto 0; 
+    }
+    .sticky-frame { align-items: center; }
+  }
+
+  .grid-frame {
+    display: grid;
+    grid-template-columns: var(--col1) var(--col2) var(--col3) var(--col4);
+    gap: var(--gap);
+    width: 100%;
+  }
+
+  .main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 3rem; 
+    padding-bottom: 4rem; 
+  }
+
+  /* =========================================
+     HERO SECTION
+  ========================================= */
+  /* The non-sticky container to reserve space and act as the snap target */
+.hero-spacer {
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  pointer-events: none; 
+}
+  
+ /* Make the hero sticky, push it behind, and pull it up to cover the spacer */
+.hero-section {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  margin-top: -100vh; 
+  z-index: 0; 
+  /* Add these three lines to re-center the strip */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Elevate all subsequent sections so they naturally slide over the sticky hero */
+.chapter-target, 
+.gradient-transition, 
+.fluidity-scroll-track {
+  position: relative;
+  z-index: 10;
+}
+
+  .hero-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+    object-position: top; 
+    z-index: 1;
+  }
+
+  .hero-strip {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    background-color: #191616;
+    color: #FAFAFD;
+    padding: 2.5rem 0; 
+  }
+
+  .hero-strip-inner {
+    width: 100%;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 1.7vw; 
+    box-sizing: border-box;
+  }
+
+  /* =========================================
+     TYPOGRAPHY & CONTENT STYLES
+  ========================================= */
+  .ch-title {
+    font-size: 7.6rem; 
+    font-weight: 700;
+    letter-spacing: -0.04em; 
+    line-height: 1;
+    margin: 0;
+  }
+
+  .ch-desc {
+    font-size: 2.3rem; 
+    font-weight: 400;
+    line-height: 1.35;
+    margin: 0;
+    letter-spacing: 0;
+  }
+
+  .span-cols-1-2 { grid-column: 1 / span 2; }
+  .span-cols-3-4 { grid-column: 3 / span 2; }
+
+  /* =========================================
+     CHAPTER 02 SPECIFIC: SYMBOLS
+  ========================================= */
+  .symbols-container {
+    background-color: #F3F1F2;
+    border-radius: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex-grow: 1;
+    min-height: 0;
+  }
+
+  .symbol-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .symbol-box:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 15%;
+    bottom: 15%;
+    width: 1px;
+    background-color: #191616;
+  }
+
+  .symbol-img {
+    width: 40%;
+    max-height: 70%;
+    object-fit: contain;
+  }
+
+  /* =========================================
+     CHAPTER 02.1 SPECIFIC STYLES
+  ========================================= */
+  .logotype-container {
+    background-color: #F3F1F2;
+    border-radius: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    flex-grow: 1;
+    min-height: 0;
+  }
+
+  .logotype-container .symbol-box:first-child::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 15%;
+    bottom: 15%;
+    width: 1px;
+    background-color: #191616;
+  }
+
+  /* Specific sizing for the horizontal logotype vectors */
+  .logotype-img {
+    width: 65%; /* Adjust this to scale them up or down */
+    max-height: 70%;
+    object-fit: contain;
+  }
+
+  /* =========================================
+     CHAPTER 02.2 SPECIFIC: FLUIDITY
+  ========================================= */
+  .fluidity-scroll-track {
+    height: 400vh; /* Creates the "scroll space" while pinned */
+    width: 100%;
+    scroll-snap-align: start; /* Snaps to the start of the animation */
+    position: relative;
+  }
+
+  .fluidity-sticky-slide {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .fluidity-container {
+    background-color: #F3F1F2;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    min-height: 0;
+    overflow: hidden; /* Ensures the shape doesn't break out of the box when wide */
+  }
+
+  .fluidity-img {
+    height: 70%; 
+    width: auto;
+    transform-origin: center; 
+    /* Removed will-change: transform; to prevent SVG rasterization */
+  }
+  /* =========================================
+     GLOBAL ASSET CONTAINER SIZING & POSITION
+  ========================================= */
+  .symbols-container,
+  .logotype-container,
+  .fluidity-container {
+    max-height: 33vh;
+    margin-top: auto !important; /* Forces the container to the bottom */
+    margin-bottom: 3rem !important; /* Removes the old hardcoded bottom margins */
+  }
+
+</style>
+</head>
+<body>
+
+  <main>
+    
+    <!-- =========================================
+         HERO SECTION (Scrolls away normally)
+    ========================================= -->
+    <div class="hero-spacer snap-section"></div>
+
+  <section class="hero-section bg-black">
+    <img src="assets/ishtar/hero.webp" alt="Ishtar Campaign" class="hero-bg">
+    <div class="hero-strip">
+      <div class="hero-strip-inner">
+        <div class="grid-frame">
+          <div><img class="logo" src="assets/ishtar/frame-logo.svg" alt="Ishtar Logo"></div>
+          <div class="split-col">
+            <div>ISHTAR LTD<br>Brand and Identity<br>SS 2023</div>
+            <div class="text-right">SINCE<br>AUGUST<br>1982</div>
+          </div>
+          <div class="split-col">
+            <div>LOCAL<br>SUSTAINABLE<br>FASHION</div>
+            <div class="text-right">MADE IN PEACE<br>IN THE MIDDLE<br>EAST</div>
+          </div>
+          <div class="split-col">
+            <div>HQ<br>AGRIPAS ST 70<br>JLM</div>
+            <div class="text-right">COORD<br>31°47’04”N<br>35°12’42”E</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- =========================================
+         GLOBAL STICKY FRAME (Scrolls up, then locks)
+    ========================================= -->
+    <div id="global-frame" class="sticky-frame frame-white">
+      <div class="desktop-container">
+        <header class="grid-frame top-bar frame-pointer-auto">
+          <div id="f-page">[ PAGE 1 ]</div>
+          <div id="f-chap">[ CHAPTER 01 ]</div>
+          <div></div>
+          <div id="f-title" class="text-right">[ THE STORY ]</div>
+        </header>
+
+        <footer class="grid-frame bottom-bar frame-pointer-auto">
+          <div><img class="logo" src="assets/ishtar/frame-logo.svg" alt="Ishtar Logo"></div>
+          <div class="split-col">
+            <div>ISHTAR LTD<br>Brand and Identity<br>SS 2023</div>
+            <div class="text-right">SINCE<br>AUGUST<br>1982</div>
+          </div>
+          <div class="split-col">
+            <div>LOCAL<br>SUSTAINABLE<br>FASHION</div>
+            <div class="text-right">MADE IN PEACE<br>IN THE MIDDLE<br>EAST</div>
+          </div>
+          <div class="split-col">
+            <div>HQ<br>AGRIPAS ST 70<br>JLM</div>
+            <div class="text-right">COORD<br>31°47’04”N<br>35°12’42”E</div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <!-- =========================================
+         CHAPTER 01
+    ========================================= -->
+    <section class="snap-section bg-red text-light chapter-target" data-frame="frame-white" data-page="[ PAGE 1 ]" data-chap="[ CHAPTER 01 ]" data-title="[ THE STORY ]">
+      <div class="desktop-container">
+        <header class="grid-frame top-bar" style="visibility: hidden;"><div>X</div><div>X</div><div></div><div>X</div></header>
+        <div class="main-content">
+          <div class="grid-frame">
+            <div class="span-cols-1-2"><h1 class="ch-title">01.The Story</h1></div>
+            <div class="span-cols-3-4">
+              <p class="ch-desc">
+                <strong>ISHTAR</strong> is a Jerusalem-founded fashion house built on the visual identities of the Middle East. By translating regional traditions into contemporary design, the brand serves as a platform for Mizrahi art—preserving heritage through strict craftsmanship and sustainable form.
+              </p>
+            </div>
+          </div>
+        </div>
+        <footer class="grid-frame bottom-bar" style="visibility: hidden;"><div>X</div><div>X</div><div>X</div><div>X</div></footer>
+      </div>
+    </section>
+
+    <!-- THE GRADIENT SEAM -->
+    <div class="gradient-transition"></div>
+
+    <!-- =========================================
+         CHAPTER 02
+    ========================================= -->
+    <section class="snap-section bg-white text-dark chapter-target" data-frame="frame-black" data-page="[ PAGE 2 ]" data-chap="[ CHAPTER 02 ]" data-title="[ SYMBOLS ]">
+      <div class="desktop-container">
+        <header class="grid-frame top-bar" style="visibility: hidden;"><div>X</div><div>X</div><div></div><div>X</div></header>
+        <div class="main-content">
+          <div class="grid-frame">
+            <div class="span-cols-1-2"><h1 class="ch-title">02.Symbols</h1></div>
+            <div class="span-cols-3-4">
+              <p class="ch-desc">
+                Rooted in regional visual traditions, the logo integrates the hamsa with a fluid, grapevine-inspired motif. The final identity distills this fusion into a stark, fragmented geometric icon, balancing historical symbolism with contemporary edge.
+              </p>
+            </div>
+          </div>
+
+          <div class="symbols-container">
+            <div class="symbol-box"><img src="assets/ishtar/symbols-1.svg" alt="Hamsa Symbol" class="symbol-img"></div>
+            <div class="symbol-box"><img src="assets/ishtar/symbols-2.svg" alt="Grapevine Motif" class="symbol-img"></div>
+            <div class="symbol-box"><img src="assets/ishtar/symbols-3.svg" alt="Geometric Icon" class="symbol-img"></div>
+          </div>
+        </div>
+        <footer class="grid-frame bottom-bar" style="visibility: hidden;"><div>X</div><div>X</div><div>X</div><div>X</div></footer>
+      </div>
+    </section>
+
+    <!-- =========================================
+         PAGE 3: CHAPTER 02.1 (LOGOTYPE)
+    ========================================= -->
+    <section class="snap-section bg-white text-dark chapter-target" data-frame="frame-black" data-page="[ PAGE 3 ]" data-chap="[ CHAPTER 02 ]" data-title="[ SYMBOLS ]">
+      <div class="desktop-container">
+        <header class="grid-frame top-bar" style="visibility: hidden;"><div>X</div><div>X</div><div></div><div>X</div></header>
+        
+        <div class="main-content">
+          
+          <!-- Row 1: Title -->
+          <div class="grid-frame" style="margin-bottom: 3rem;">
+            <div class="span-cols-1-2">
+              <h1 class="ch-title">02.1.Logotype</h1>
+            </div>
+          </div>
+
+          <!-- Row 2: Top-Aligned Paragraphs -->
+          <div class="grid-frame" style="margin-bottom: 2rem;">
+            <div class="span-cols-1-2">
+              <p class="ch-desc">
+                The logotype draws inspiration from the structural </br>
+                strokes of ancient Babylonian cuneiform writing
+              </p>
+            </div>
+            <div class="span-cols-3-4">
+              <p class="ch-desc">
+                The characters of the Ishtar logotype were meticulously integrated into the abstracted symbol, merging language and icon
+              </p>
+            </div>
+          </div>
+
+          <!-- 2-Column Asset Container -->
+          <div class="logotype-container">
+            <div class="symbol-box">
+              <img src="assets/ishtar/logotype-1.svg" alt="Cuneiform Inspiration" class="logotype-img">
+            </div>
+            <div class="symbol-box">
+              <img src="assets/ishtar/logotype-2.svg" alt="Logotype Integration" class="logotype-img">
+            </div>
+          </div>
+
+        </div>
+        
+        <footer class="grid-frame bottom-bar" style="visibility: hidden;"><div>X</div><div>X</div><div>X</div><div>X</div></footer>
+      </div>
+    </section>
+
+    <div class="fluidity-scroll-track" id="fluidity-track">
+      <section class="fluidity-sticky-slide bg-white text-dark chapter-target" data-frame="frame-black" data-page="[ PAGE 4 ]" data-chap="[ CHAPTER 02 ]" data-title="[ SYMBOLS ]">
+        <div class="desktop-container">
+          <header class="grid-frame top-bar" style="visibility: hidden;"><div>X</div><div>X</div><div></div><div>X</div></header>
+          
+          <div class="main-content">
+            
+            <div class="grid-frame" style="margin-bottom: 2rem;">
+              <div class="span-cols-1-2">
+                <h1 class="ch-title">02.2.Fluidity</h1>
+              </div>
+              <div class="span-cols-3-4">
+                <p class="ch-desc">
+                  The symbol is designed to morph and adapt to any dimension, reinforcing a versatile and fluid brand identity that resonates with everyone, everywhere
+                </p>
+              </div>
+            </div>
+
+            <div class="fluidity-container">
+              <img src="assets/ishtar/symbols-3.svg" alt="Fluid Morphing Symbol" class="fluidity-img" id="fluid-symbol">
+            </div>
+
+          </div>
+          
+          <footer class="grid-frame bottom-bar" style="visibility: hidden;"><div>X</div><div>X</div><div>X</div><div>X</div></footer>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- =========================================
+       JAVASCRIPT FOR DYNAMIC FRAME TEXT & COLOR
+  ========================================= -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const globalFrame = document.getElementById('global-frame');
+      const fPage = document.getElementById('f-page');
+      const fChap = document.getElementById('f-chap');
+      const fTitle = document.getElementById('f-title');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Apply the appropriate frame color class dynamically
+            globalFrame.className = `sticky-frame ${entry.target.getAttribute('data-frame')}`;
+
+            // Swap the header text data dynamically
+            fPage.textContent = entry.target.getAttribute('data-page');
+            fChap.textContent = entry.target.getAttribute('data-chap');
+            fTitle.textContent = entry.target.getAttribute('data-title');
+          }
+        });
+      }, { threshold: 0.5 }); 
+
+      // Only observe the specific chapters containing data attributes
+      document.querySelectorAll('.chapter-target').forEach(sec => observer.observe(sec));
+    });
+    // FLUIDITY SCROLL-JACKING ANIMATION
+      document.addEventListener("scroll", () => {
+        const track = document.getElementById('fluidity-track');
+        const symbol = document.getElementById('fluid-symbol');
+
+        if (!track || !symbol) return;
+
+        const rect = track.getBoundingClientRect();
+        
+        // Calculate scroll progress through the track (0 to 1)
+        // scrollDistance is total track height minus the 100vh viewport
+        const scrollDistance = rect.height - window.innerHeight; 
+        let progress = -rect.top / scrollDistance;
+
+        // Clamp the progress so it doesn't shrink backward or over-stretch
+        progress = Math.max(0, Math.min(1, progress));
+
+        // Maps progress to scaleX. Adjust the '5' if you want it to stretch wider or narrower
+        const minScale = 1;
+        const maxScale = 6.5; 
+        const currentScale = minScale + (maxScale - minScale) * progress;
+
+        symbol.style.transform = `scaleX(${currentScale})`;
+      });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+/* global.css */
+:root {
+    --font-project-title: clamp(2.5rem, 4.5vw, 5.5rem);
+    --font-body: clamp(0.85rem, 1vw, 0.95rem);
+    --nav-height: 80px;
+}
+.project-title { 
+    font-weight: 400; 
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Locked as the default */
+    letter-spacing: -0.05em; 
+    line-height: 1;          
+}
+
+@font-face { font-family: 'KhilazonRegular'; src: url('assets/khilazon/khilazon_regular.ttf') format('truetype'); }
+@font-face { font-family: 'KhilazonCursive'; src: url('assets/khilazon/khilazon_cursive.ttf') format('truetype'); }
+@font-face { font-family: 'Arbel'; src: url('assets/khilazon/ArbelHagilda_Regular [Menukad].otf') format('opentype'); }
+
+body { 
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    letter-spacing: -0.02em; 
+    overflow-x: hidden;
+    margin: 0;
+    background: white;
+    color: black;
+}
+/* Prevent FOUC by keeping the page invisible until ready */
+body { 
+    opacity: 0; 
+    transition: opacity 0.3s ease-out; 
+}
+body.loaded { 
+    opacity: 1; 
+}
+
+/* Page-Specific Theme Overrides */
+body.theme-inter { font-family: "Helvetica Neue", Helvetica, Arial, "Inter", sans-serif; }
+.title-underline { text-decoration: underline; text-underline-offset: 8px; text-decoration-thickness: 1px; }
+
+/* STICKY FLOATING NAV */
+/* UPDATED NAV */
+nav {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+    background: #ffffff; /* Solid white background */
+    /* Removed the fixed height, negative margin, and backdrop-filter */
+}
+
+.site-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1600px;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-top: 4rem; 
+}
+
+/* Project Tags - Small Glassmorphism Edition */
+.project-tag {
+    padding: 0.25rem 0.75rem;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 9999px;
+    display: inline-block;
+    transition: all 0.4s ease-in-out;
+    cursor: default;
+
+    /* The Glass Base */
+    background-color: rgba(219, 220, 222, 0.501); /* Semi-transparent gray */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); /* Safari support */
+
+    /* The Liquid Edge: Sharp white rim, soft inner highlight, ultra-tight drop shadow */
+    box-shadow: 
+        inset 0 0 0 1px rgba(255, 255, 255, 0.7), 
+        inset 0 2px 4px rgba(255, 255, 255, 0.4), 
+        0 1px 3px rgba(0, 0, 0, 0.04); 
+}
+
+/* Hover State - Keeps the glassy edge but introduces your original colors */
+.project-tag:hover {
+    /* Using a slightly transparent version of your neon gradient */
+    background: linear-gradient(90deg, rgba(157, 255, 245, 0.85) 0%, rgba(236, 255, 110, 0.85) 100%);
+    background-blend-mode: soft-light;
+    transform: translateY(-1px);
+    color: #000;
+    
+    /* Slightly amplifies the light reflection and shadow when lifted */
+    box-shadow: 
+        inset 0 0 0 1px rgba(255, 255, 255, 0.9), 
+        inset 0 2px 4px rgba(255, 255, 255, 0.6), 
+        0 3px 5px rgba(0, 0, 0, 0.06); 
+}
+
+/* Image Gallery (For Three Scripts) */
+.gallery-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 0.5rem;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+    .gallery-container {
+        flex-direction: row; 
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 1rem;
+        padding-left: 5vw; 
+    }
+    .gallery-container::-webkit-scrollbar { display: none; }
+    
+    .gallery-item {
+        flex: 0 0 auto;
+        height: 90vh; 
+        width: auto;
+        scroll-snap-align: start;
+        padding-right: 2rem;
+        display: flex;
+        align-items: center;
+    }
+}
+.gallery-item img { height: 100%; width: auto; display: block; object-fit: contain; }
+
+/* Khilazon Specimen Classes */
+.font-khilazon { font-family: 'KhilazonRegular', sans-serif;
+letter-spacing: normal; /* This overrides the -0.05em from the project-title class */
+}
+.font-khilazon-cur { font-family: 'KhilazonCursive', sans-serif; }
+.font-arbel { font-family: 'Arbel', sans-serif; }
+[contenteditable]:focus { outline: none; }
+.specimen-title { font-size: var(--size-title-desktop); line-height: var(--lead-title-desktop); }
+.specimen-paragraph { font-size: var(--size-p-desktop); line-height: var(--lead-p-desktop); }
+/* .separator-container { padding: 5rem 0; } */
+.separator-line { border-top: 1px solid black; width: 100%; }
+
+/* Mobile Utilities */
+.mobile-svg, .mobile-only { display: none; }
+
+@media (max-width: 768px) {
+    .desktop-svg, .desktop-only { display: none; }
+    .mobile-svg { display: block; }
+    .mobile-only { display: inline; }
+    /* .separator-container { padding: 2rem 0; } */
+    .specimen-title { font-size: var(--size-title-mobile); line-height: var(--lead-title-mobile); }
+    .specimen-paragraph { font-size: var(--size-p-mobile); line-height: var(--lead-p-mobile); }
+}
+
+/* CTA Button */
+.cta-button {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    border: 1px solid black;
+    border-radius: 9999px;
+    padding: 0.25rem;
+    text-decoration: none;
+}
+
+.cta-inner {
+    background-color: black;
+    color: white;
+    /* Liquid glass effect: Sharp inner rim, soft inner glow, subtle outer shadow */
+    box-shadow: 
+        inset 0 0 0 1px rgba(255, 255, 255, 0.376), 
+        inset 0 0 8px rgba(255, 255, 255, 0.2), 
+        0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cta-text {
+    border-radius: 9999px;
+    padding: 0.25rem 1.25rem;
+    font-size: 1rem;
+    padding-top: 0.4rem; /* Optical adjustment for Khilazon font */
+}
+
+.cta-icon {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+}
+
+.cta-button:hover .cta-inner {
+    background-color: #FF2B00;
+    /* Vibrant aura: Bright rim, warm internal reflection, outward colored glow */
+    box-shadow: 
+        inset 0 0 0 1px rgba(255, 255, 255, 0.4), 
+        inset 0 0 5px rgba(255, 210, 150, 0.6), 
+        /* 0 0 10px rgba(255, 43, 0, 0.5), */
+        0 0 10px rgba(255, 43, 0, 0.3);
+}
+
+/* --- KHILAZON SPECIFICS --- */
+.massive-type {
+    font-size: 22vw; 
+    line-height: 0.8; 
+    letter-spacing: normal;
+    white-space: nowrap; 
+    overflow: visible; 
+    text-align: center; 
+    padding-bottom: 2vw; 
+}
+@media (max-width: 768px) {
+    .massive-type { font-size: 35vw; }
+}
+
+/* Custom UI Sliders */
+.slider-row { display: flex; align-items: center; gap: 1.5rem; }
+.slider-label { font-size: 14px; font-weight: 500; width: 2rem; text-align: right; flex-shrink: 0; font-family: 'Arbel', sans-serif; }
+.slider-box { flex: 1; display: flex; align-items: center; background-color: #FAFAFA; border: 1px solid #f9fafb; border-radius: 1rem; padding: 1rem 1.5rem; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+
+input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 18px; width: 18px; border-radius: 50%; background: #000000; cursor: pointer; margin-top: -7.5px; }
+input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 3px; cursor: pointer; background: #000000; border-radius: 2px; }

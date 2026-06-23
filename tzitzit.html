@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tzitzit - Ram Salim</title>
+    <!-- Link the external stylesheet -->
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+    <!-- The external header will be injected here -->
+    <div id="nav-placeholder"></div>
+
+    <main class="grid">
+        <div class="info-pane">
+            <div class="top-content">
+                <h1>Tzitzit</h1>
+                
+                <div class="specs-list">
+                    <span>Type design</span>
+                    <span>Hebrew Type</span>
+                    <span>Information Design</span>
+                    <span>Systematic Design</span>
+                    <span>Generative Systems</span>
+                    <span>Visual Reasearch</span>
+                </div>
+                
+                <div class="description">
+                    <p>Gemtaria of the Tzitzit is a visual and structural study of the ancient art of tying ritual fringes. The project explores the intersection of sacred tradition and typographic form, transforming a physical act of religious observance into a systematic visual language rooted in Jewish mysticism and heritage.</p>
+                    <p>The physical structure of the knots was translated into a comprehensive graphic alphabet from Alef to Tav. Using a precise diagrammatic approach, each character was designed to maintain a direct visual and mathematical link to the original ritual ties, bridging the gap between fiber and font.</p>
+                </div>
+            </div>
+            
+            <div class="copyright desktop-copy">
+                RAM SALIM © 2026
+            </div>
+        </div>
+
+        <div class="gallery">
+            <img src="assets/tzitzit/1.webp" alt="Tzitzit 1">
+            <img src="assets/tzitzit/2.webp" alt="Tzitzit 2">
+            <img src="assets/tzitzit/3.webp" alt="Tzitzit 3">
+            <img src="assets/tzitzit/4.webp" alt="Tzitzit 4">
+            <img src="assets/tzitzit/5.webp" alt="Tzitzit 5">
+            <img src="assets/tzitzit/6.webp" alt="Tzitzit 6">
+            <img src="assets/tzitzit/7.webp" alt="Tzitzit 7">
+            <img src="assets/tzitzit/8.webp" alt="Tzitzit 8">
+            <img src="assets/tzitzit/9.webp" alt="Tzitzit 9">
+            <img src="assets/tzitzit/10.webp" alt="Tzitzit 10">
+            <img src="assets/tzitzit/11.webp" alt="Tzitzit 11">
+            <img src="assets/tzitzit/12.webp" alt="Tzitzit 12">
+            <img src="assets/tzitzit/13.webp" alt="Tzitzit 13">
+            <img src="assets/tzitzit/14.webp" alt="Tzitzit 14">
+            <img src="assets/tzitzit/15.webp" alt="Tzitzit 15">
+            <img src="assets/tzitzit/16.webp" alt="Tzitzit 16">
+            <img src="assets/tzitzit/17.webp" alt="Tzitzit 17">
+            <img src="assets/tzitzit/18.webp" alt="Tzitzit 18">
+            <img src="assets/tzitzit/19.webp" alt="Tzitzit 19">
+            <img src="assets/tzitzit/20.webp" alt="Tzitzit 20">
+            <img src="assets/tzitzit/21.webp" alt="Tzitzit 21">
+            <img src="assets/tzitzit/22.webp" alt="Tzitzit 22">
+            <img src="assets/tzitzit/23.webp" alt="Tzitzit 23">
+            <img src="assets/tzitzit/24.webp" alt="Tzitzit 24">
+            <img src="assets/tzitzit/25.webp" alt="Tzitzit 25">
+            <img src="assets/tzitzit/26.webp" alt="Tzitzit 26">
+        </div>
+        
+        <div class="copyright mobile-copy">
+            RAM SALIM © 2026
+        </div>
+    </main>
+
+    <!-- Script to load the header -->
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').outerHTML = data;
+            })
+            .catch(error => console.error('Error loading the header:', error));
+    </script>
+
+    <script src="main.js"></script>
+</body>
+</html>

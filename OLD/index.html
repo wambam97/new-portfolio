@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ram Salim | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="global.css">
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #ffffff;
+            touch-action: none; /* Prevents mobile swipe-to-scroll from interfering with dragging */
+        }
+
+        #bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.15; 
+            pointer-events: none;
+        }
+
+        .desktop-ui {
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 10;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .center-lockup {
+            position: absolute;
+            top: 48%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 20;
+            width: 100%;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .desktop-folder {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35rem;
+            width: auto; 
+            min-width: 90px;
+            cursor: pointer;
+            z-index: 25;
+            transition: transform 0.15s ease-out;
+            pointer-events: auto;
+            text-decoration: none;
+            transform: translate(-50%, -50%); 
+        }
+
+        .desktop-folder:hover {
+            transform: translate(-50%, -50%) scale(1.02);
+        }
+
+        .desktop-folder.is-dragging {
+            transition: none;
+            transform: translate(-50%, -50%) scale(1.02);
+            z-index: 100;
+        }
+
+        /* 1. Transparent dark rectangle with negative margin fix */
+        .desktop-folder.is-dragging .folder-icon {
+            background-color: rgba(0, 0, 0, 0.5); 
+            border: 2px solid rgba(190, 190, 190, 1);
+            padding: 4px;
+            padding-bottom: 2px;
+            margin: -4px; /* Completely offsets the layout shift caused by padding */
+            border-radius: 5px;
+        }
+
+        /* 2. Label box with negative margin fix */
+        .desktop-folder.is-dragging .folder-label {
+            background-color: #0066E8;
+            color: white;
+            padding: 2px 10px;
+            margin: -2px -10px; /* Offsets the layout shift so text doesn't jump */
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .folder-icon {
+            width: 65px;
+            height: auto;
+            pointer-events: none; 
+            box-sizing: content-box; 
+        }
+
+        .folder-label {
+            font-size: 11px;
+            color: #111;
+            text-align: center;
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+            pointer-events: none;
+            display: block; 
+        }
+    </style>
+</head>
+<body class="theme-inter text-black antialiased">
+
+    <video id="bg-video" autoplay loop muted playsinline>
+        <source src="assets/ui/bg-animation.mp4" type="video/mp4">
+    </video>
+
+    <nav id="nav-placeholder" data-page="home" dir="ltr" class="relative z-50"></nav>
+
+    <main class="desktop-ui" id="desktop-area">
+        
+        <div class="center-lockup" id="center-zone">
+            <h2 class="text-3xl md:text-[70px] font-normal mb-0 tracking-tight text-black">Hi, I'm</h2>
+            
+            <h1 class="text-[6rem] md:text-[10rem] leading-[1.1] mb-2 font-sans font-medium">
+                Ram Salim
+            </h1>
+            
+            <p class="text-lg md:text-[40px] text-gray-500 font-normal leading-[1.2] mx-auto tracking-tight" style="color: #888;">
+                I Specialize in Type Design, Experimental Typography,<br>
+                Illustration, Motion Design & AI Productions<br>
+                Print & Digital
+            </p>
+        </div>
+
+        <div id="folders-container"></div>
+
+    </main>
+
+    <div class="absolute bottom-8 left-8 z-50 text-[10px] text-gray-400 uppercase tracking-widest pointer-events-none font-sans">
+        Ram Salim © 2026
+    </div>
+
+    <script>
+        const folders = [
+            { id: '3-scripts', label: '3-scripts', link: 'three-scripts.html' },
+            { id: 'tzitzit', label: 'tzitzit', link: 'tzitzit.html' },
+            { id: 'alon-livne', label: 'alon-livné', link: 'alon-livne.html' },
+            { id: 'khilazon', label: 'khilazon', link: 'khilazon.html' },
+            { id: 'khilazon-3d', label: 'khilazon-3d', link: 'https://khilazon-3d.vercel.app/' },
+            { id: 'ishtar', label: 'ishtar', link: 'ishtar.html' },
+            { id: 'flower', label: 'flower', link: '#' },
+            { id: 'art', label: 'art', link: '#' }
+        ];
+
+        const container = document.getElementById('folders-container');
+        const deadZone = { left: 18, right: 82, top: 25, bottom: 75 };
+        const placedFolders = [];
+        const MIN_DISTANCE_PX = 100; 
+
+        if (container) {
+            folders.forEach(folder => {
+                let x_vw, y_vh, inDeadZone, overlapping;
+                let attempts = 0;
+                
+                do {
+                    x_vw = Math.random() * 88 + 6; 
+                    y_vh = Math.random() * 74 + 12; 
+                    
+                    inDeadZone = (x_vw > deadZone.left && x_vw < deadZone.right && y_vh > deadZone.top && y_vh < deadZone.bottom);
+                    
+                    let x_px = (x_vw / 100) * window.innerWidth;
+                    let y_px = (y_vh / 100) * window.innerHeight;
+
+                    overlapping = placedFolders.some(placed => {
+                        let px = (placed.x / 100) * window.innerWidth;
+                        let py = (placed.y / 100) * window.innerHeight;
+                        let distance = Math.hypot(x_px - px, y_px - py);
+                        return distance < MIN_DISTANCE_PX;
+                    });
+
+                    attempts++;
+                } while ((inDeadZone || overlapping) && attempts < 2000); 
+
+                placedFolders.push({ x: x_vw, y: y_vh });
+
+                const folderEl = document.createElement('a');
+                folderEl.href = folder.link;
+                folderEl.className = 'desktop-folder';
+                folderEl.style.left = `${x_vw}vw`;
+                folderEl.style.top = `${y_vh}vh`;
+                folderEl.setAttribute('draggable', 'false'); 
+                
+                folderEl.innerHTML = `
+                    <img src="assets/ui/folder_home.svg" alt="Folder" class="folder-icon" draggable="false">
+                    <span class="folder-label">${folder.label}</span>
+                `;
+                
+                container.appendChild(folderEl);
+            });
+        }
+
+        let draggedFolder = null;
+        let startX, startY, initialLeft, initialTop;
+        let hasDragged = false;
+
+        document.addEventListener('pointerdown', (e) => {
+            const folder = e.target.closest('.desktop-folder');
+            if (!folder) return;
+
+            draggedFolder = folder;
+            hasDragged = false;
+            
+            const style = window.getComputedStyle(folder);
+            initialLeft = parseFloat(style.left);
+            initialTop = parseFloat(style.top);
+            
+            startX = e.clientX;
+            startY = e.clientY;
+            
+            folder.classList.add('is-dragging');
+        });
+
+        document.addEventListener('pointermove', (e) => {
+            if (!draggedFolder) return;
+
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+
+            if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+                hasDragged = true;
+            }
+
+            draggedFolder.style.left = `${initialLeft + dx}px`;
+            draggedFolder.style.top = `${initialTop + dy}px`;
+        });
+
+        document.addEventListener('pointerup', () => {
+            if (draggedFolder) {
+                draggedFolder.classList.remove('is-dragging');
+                draggedFolder = null;
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            const folder = e.target.closest('.desktop-folder');
+            if (folder && hasDragged) {
+                e.preventDefault();
+            }
+        });
+
+        Promise.all([
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    const navPlaceholder = document.getElementById('nav-placeholder');
+                    if (navPlaceholder) {
+                        navPlaceholder.innerHTML = data;
+                        
+                        // Hide the separator and second folder entirely on the home page
+                        const breadcrumbTail = document.getElementById('breadcrumb-tail');
+                        if (breadcrumbTail) breadcrumbTail.style.display = 'none';
+                    }
+                })
+                .catch(err => console.log('Nav loading error:', err)),
+                
+            document.fonts.ready
+        ])
+        .finally(() => {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>

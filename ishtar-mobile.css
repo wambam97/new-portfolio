@@ -1,0 +1,297 @@
+:root {
+    --brand-orange: #F04429;
+    --bg-dark: #191616;
+    --text-dark: #191616;
+    --text-light: #fff;
+    --gray-bg: #f4f4f4;
+    --border-dark: #333;
+    --tab-height: 48px; 
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+body { background-color: var(--bg-dark); color: var(--text-dark); }
+
+/* Hero Container - Model Video Real Estate */
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 140px; /* Leave padding-top intact for your nav header clearance */
+}
+
+.hero {
+    width: 100%;
+    /* Calculates exactly 100vh minus the fixed nav clearance space */
+    height: calc(100vh - 140px); 
+    overflow: hidden;
+}
+
+.hero video { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    object-position: center top;
+    display: block; 
+}
+
+/* Hero Strip */
+.hero-strip { 
+    flex-shrink: 0; 
+    background: var(--bg-dark); color: var(--text-light); 
+    padding: 20px 20px calc(var(--tab-height) + 15px) 20px; 
+    font-size: 0.75rem; 
+    text-transform: uppercase;
+    line-height: 1.3;
+}
+.info-grid-top {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    padding-bottom: 15px; border-bottom: 1px solid var(--border-dark); margin-bottom: 15px;
+}
+.info-grid-bottom {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.split-col {
+    display: flex; justify-content: space-between; gap: 10px;
+}
+.text-right {
+    text-align: right;
+}
+.logo-wrapper {
+    width: 100%;
+}
+.logo-wrapper img { 
+    width: 100%; 
+    height: auto; 
+    display: block; 
+}
+
+/* Chapter Layout */
+.chapter-container {
+    margin-top: calc(-1 * var(--tab-height)); 
+    position: relative;
+}
+
+.chapter-container-notab {
+    position: relative;
+}
+
+.tab {
+    width: 50%;
+    height: var(--tab-height); 
+    display: flex;
+    align-items: center; 
+    padding: 0 20px;
+    font-size: 1rem;
+    border: 1px solid var(--text-dark);
+    border-bottom: none;
+    border-left: none;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-left: 0;
+    font-weight: 500;
+    box-sizing: border-box; 
+}
+
+.chapter-body {
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    padding-top: 15px;
+    padding-bottom: 60px; 
+    overflow: hidden; 
+}
+
+/* Colors per section */
+.story-section .tab { background-color: var(--brand-orange); }
+.story-section .chapter-body { background-color: var(--brand-orange); }
+
+.symbols-track .tab { background-color: var(--text-light); color: var(--text-dark); }
+.symbols-track .chapter-body { background-color: var(--text-light); color: var(--text-dark); padding-bottom: 0; }
+
+.brand-seal-section .tab { background-color: var(--text-light); color: var(--text-dark); }
+.brand-seal-section .chapter-body { background-color: var(--text-light); color: var(--text-dark); }
+
+.typography-palette-section .tab { background-color: var(--bg-dark); color: var(--text-light); border-color: var(--border-dark); }
+.typography-palette-section .chapter-body { background-color: var(--bg-dark); color: var(--text-light); }
+.typography-palette-section .chapter-header { border-bottom-color: var(--border-dark); }
+
+/* Typography */
+.chapter-header {
+    font-weight: 700; letter-spacing: -0.05em;
+    padding: 0 20px 20px; border-bottom: 1px solid var(--text-dark);
+    font-size: 3.2rem;
+}
+
+.content-block { 
+    display: flex; gap: 15px; padding: 20px; 
+    font-size: 1rem; line-height: 1.3; font-weight: 400;
+}
+.content-block .index { 
+    font-weight: 700; font-size: 1rem; white-space: nowrap; 
+}
+
+.symbols-track,
+.brand-seal-section {
+    position: relative;
+}
+.sticky-wrapper {
+    position: sticky;
+    top: 0;
+    display: flex; flex-direction: column;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    overflow: hidden;
+}
+
+/* Logo Evolution Box */
+/* Logo Evolution Box */
+.evolution-container {
+    width: 100%;
+    aspect-ratio: 1; /* Locks the gallery to a perfect square so it NEVER jumps */
+    background: #F8F6F4;
+    margin: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    padding: 40px;
+    flex-shrink: 0;
+}
+
+.evolution-stage { 
+    width: 70%;
+    height: 100%; /* Forces the image to respect the container's locked height */
+    object-fit: contain;
+    transition: opacity 0.3s ease; 
+}
+
+/* 04. Applications Section */
+.applications-section .tab { 
+    background-color: var(--bg-dark); 
+    color: var(--text-light); 
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: none;
+    border-left: none;
+    position: relative;
+    z-index: 2; 
+}
+
+.applications-section .chapter-body { 
+    background-color: var(--bg-dark); 
+    color: var(--text-light); 
+    padding-bottom: 30px; 
+    border-bottom-left-radius: 0; 
+    border-bottom-right-radius: 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: none;
+    border-left: none;
+    position: relative;
+    z-index: 1;
+    margin-top: -1px; 
+}
+
+.applications-section .chapter-header { 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
+}
+
+/* Free Scroll Gallery */
+.applications-gallery {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-dark);
+}
+.applications-gallery img, 
+.applications-gallery video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* NAV STYLES */
+.global-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    color: #111;
+    z-index: 1000;
+    padding: 3rem 6vw 1rem 6vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.5rem;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease; 
+    border-bottom: 1px solid #000;
+    align-items: baseline;
+}
+
+body.modal-open .global-header {
+    background-color: #e5e5e5;
+}
+
+.global-header.nav-hidden {
+    transform: translateY(-100%);
+}
+.global-header .logo {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1;
+    text-decoration: none;
+    color: #111;
+    letter-spacing: -0.02em;
+}
+.global-header nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    font-size: 16px;
+    line-height: 1;
+    text-transform: uppercase;
+}
+.global-header nav a {
+    text-decoration: none;
+    color: #111;
+}
+
+.hero-container {
+    padding-top: 140px; 
+}
+
+/* SCOPED MODAL STYLES */
+#projects-modal {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: #e5e5e5; z-index: 990; overflow-y: auto;
+    padding: 160px 6vw 8rem 6vw; 
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    color: #111; 
+}
+#projects-modal.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+body.modal-open { overflow: hidden; }
+
+#projects-modal .projects-grid {
+    display: flex; flex-direction: column; gap: 4rem; 
+}
+#projects-modal .project-card {
+    display: flex; flex-direction: column; text-decoration: none; color: #111;
+}
+#projects-modal .project-header { margin-bottom: 0.75rem; }
+#projects-modal .project-num, 
+#projects-modal .project-title {
+    display: block; font-size: 24px; font-weight: bold; line-height: 1; letter-spacing: -0.02em;
+}
+#projects-modal .project-title {
+    text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 4px;
+}
+#projects-modal .project-media {
+    width: 100%; aspect-ratio: 2.2 / 1; background-color: #000; margin-bottom: 0.75rem;
+}
+#projects-modal .project-media img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+}
+#projects-modal .project-desc {
+    font-size: 16px; margin: 0; line-height: 1.3;
+}

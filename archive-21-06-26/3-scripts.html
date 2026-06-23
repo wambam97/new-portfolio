@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three Scripts - Ram Salim</title>
+    <!-- Link the external stylesheet -->
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+    <!-- The external header will be injected here -->
+    <div id="nav-placeholder"></div>
+
+    <main class="grid">
+        <div class="info-pane">
+            <div class="top-content">
+                <h1>Three Scripts</h1>
+                
+                <div class="specs-list">
+                    <span>Type design</span>
+                    <span>Speculative design</span>
+                    <span>Hebrew Type</span>
+                    <span>Research based</span>
+                    <span>Editorial</span>
+                    <span>Award winning</span>
+                    <span>Book Design</span>
+                </div>
+                
+                <div class="description">
+                    <p>Three Scripts is an award-winning typographic project exploring three new Hebrew writing systems. It investigates the "word" through three distinct lenses: as a magical force, a primordial concept, or a digital code. This study pushes the boundaries of how meaning and form coexist within the Hebrew language.</p>
+                    <p>The project was honored with the AlefAlefAlef Design Award for 2025 graduates, recognizing excellence in Hebrew typography. It is also preserved in the Madaf.art archive, a digital project dedicated to the curation and preservation of local Israeli design.</p>
+                </div>
+            </div>
+            
+            <div class="copyright desktop-copy">
+                RAM SALIM © 2026
+            </div>
+        </div>
+
+        <div class="gallery">
+            <img src="assets/three-scripts/1.webp" alt="Three Scripts 1">
+            <img src="assets/three-scripts/2.webp" alt="Three Scripts 2">
+            <img src="assets/three-scripts/3.webp" alt="Three Scripts 3">
+            <img src="assets/three-scripts/4.webp" alt="Three Scripts 4">
+            <img src="assets/three-scripts/5.webp" alt="Three Scripts 5">
+            <img src="assets/three-scripts/6.webp" alt="Three Scripts 6">
+            <img src="assets/three-scripts/7.webp" alt="Three Scripts 7">
+            <img src="assets/three-scripts/8.webp" alt="Three Scripts 8">
+            <img src="assets/three-scripts/9.webp" alt="Three Scripts 9">
+            <img src="assets/three-scripts/10.webp" alt="Three Scripts 10">
+            <img src="assets/three-scripts/11.webp" alt="Three Scripts 11">
+            <img src="assets/three-scripts/12.webp" alt="Three Scripts 12">
+            <img src="assets/three-scripts/13.webp" alt="Three Scripts 13">
+            <img src="assets/three-scripts/14.webp" alt="Three Scripts 14">
+            <img src="assets/three-scripts/15.webp" alt="Three Scripts 15">
+            <img src="assets/three-scripts/16.webp" alt="Three Scripts 16">
+            <img src="assets/three-scripts/17.webp" alt="Three Scripts 17">
+            <img src="assets/three-scripts/18.webp" alt="Three Scripts 18">
+            <img src="assets/three-scripts/19.webp" alt="Three Scripts 19">
+            <img src="assets/three-scripts/20.webp" alt="Three Scripts 20">
+            <img src="assets/three-scripts/21.webp" alt="Three Scripts 21">
+            <img src="assets/three-scripts/22.webp" alt="Three Scripts 22">
+            <img src="assets/three-scripts/23.webp" alt="Three Scripts 23">
+            <img src="assets/three-scripts/24.webp" alt="Three Scripts 24">
+        </div>
+        
+        <div class="copyright mobile-copy">
+            RAM SALIM © 2026
+        </div>
+    </main>
+
+    <!-- Script to load the header -->
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').outerHTML = data;
+            })
+            .catch(error => console.error('Error loading the header:', error));
+    </script>
+
+    <script src="main.js"></script>
+</body>
+</html>

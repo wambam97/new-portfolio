@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ram Salim | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Synchronized Fluid Typography */
+            --font-hero-title: clamp(2.5rem, 6vw, 5.5rem);
+            --font-hero-sub: clamp(1.5rem, 3.5vw, 3.2rem);
+            --font-section-title: clamp(2rem, 4vw, 3.5rem);
+        }
+
+        body { 
+            font-family: "Helvetica Neue", Helvetica, Arial, "Inter", sans-serif; 
+            letter-spacing: -0.02em; 
+        }
+
+        .site-container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1600px; 
+            padding-left: 5vw;
+            padding-right: 5vw;
+        }
+
+        /* 4-Column Grid logic to match text sections */
+        .project-grid {
+            display: grid;
+            gap: 1rem;
+            /* Adaptive: tries to maintain a size that fits 4 columns on most laptops */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        /* Hard Cap: Never more than 4 columns */
+        @media (min-width: 1280px) {
+            .project-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        /* Mobile-only padding to prevent text from touching the top */
+        @media (max-width: 1023px) {
+            .site-container {
+                padding-top: 4rem; /* Restores the gap on mobile */
+            }
+}
+
+        .project-card {
+            transition: all 0.2s ease-in-out;
+            background-color: #FFFFFF;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 0.5px solid rgba(0,0,0,0.05);
+        }
+
+        .project-card:hover {
+            background-color: #EEFFC4;
+            box-shadow: none;
+        }
+
+        .card-title {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            font-weight: 500;
+        }
+
+        .card-description {
+            font-size: clamp(0.85rem, 1vw, 0.95rem);
+            line-height: 1.4;
+            font-weight: 400;
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+<body class="bg-white text-black antialiased">
+
+    <div class="site-container pt-16 md:pt-24">
+
+        <header class="mb-24">
+            <h1 style="font-size: var(--font-hero-title);" class="font-bold tracking-tighter mb-4 leading-none">
+                Hi, I'm <span class="italic font-bold">RAM SALIM</span>
+            </h1>
+            <p style="font-size: var(--font-hero-sub);" class="font-normal tracking-tighter leading-[1.05] max-w-5xl">
+                I Specialize in Typography, Illustration, Motion Design & AI Productions, Print & Digital Campaigns
+            </p>
+        </header>
+
+        <main class="mb-32">
+            <h2 style="font-size: var(--font-section-title);" class="font-bold tracking-tighter mb-10">
+                Recent Projects
+            </h2>
+
+            <div class="project-grid">
+
+                <a href="three-scripts.html" class="project-card block p-7 rounded-2xl">
+                    <div class="flex items-start justify-between mb-3">
+                        <h3 class="text-lg card-title leading-tight">Three Scripts</h3>
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </div>
+                    <p class="card-description">
+                        An award winning project in experimental typography. Exploring the ties between meaning and form.
+                    </p>
+                </a>
+
+                <a href="tzitzit.html" class="project-card block p-7 rounded-2xl">
+                    <div class="flex items-start justify-between mb-3">
+                        <h3 class="text-lg card-title leading-tight">Tzitzit</h3>
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </div>
+                    <p class="card-description">
+                        A printed booklet showcasing a study of ancient ornamented rituals, and its connection to type.
+                    </p>
+                </a>
+
+                <a href="alon-livne.html" class="project-card block p-7 rounded-2xl">
+                    <div class="flex items-start justify-between mb-3">
+                        <h3 class="text-lg card-title leading-tight">Alon Livné: Spring 2027</h3>
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </div>
+                    <p class="card-description">
+                        An editorial magazine featuring the Spring 2027 collection of elite designer Alon Livné.
+                    </p>
+                </a>
+
+                <a href="#" class="project-card block p-7 rounded-2xl">
+                    <div class="flex items-start justify-between mb-3">
+                        <h3 class="text-lg card-title leading-tight">Khilazon + 3D</h3>
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </div>
+                    <p class="card-description">
+                        A modern sleek typeface. Comes in 2 styles and accompanied by a 3D interface experimental project.
+                    </p>
+                </a>
+
+                <a href="#" class="project-card block p-7 rounded-2xl">
+                    <div class="flex items-start justify-between mb-3">
+                        <h3 class="text-lg card-title leading-tight">Ishtar</h3>
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </div>
+                    <p class="card-description">
+                        When culture meets fashion, Ishtar is a brand concept for a mediterranean fashion house built on Middle Eastern culinary traditions.
+                    </p>
+                </a>
+            </div>
+        </main>
+
+        <footer class="pb-12 opacity-20 text-xs tracking-widest uppercase">
+            <p>Ram Salim © 2026</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

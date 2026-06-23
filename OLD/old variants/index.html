@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ram Salim | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-hero-title: clamp(2.5rem, 4.5vw, 5.5rem);
+            --font-hero-sub: clamp(1.5rem, 2.5vw, 3.2rem);
+            --font-section-title: clamp(2rem, 2.5vw, 3.5rem);
+        }
+
+        body { 
+            font-family: "Helvetica Neue", Helvetica, Arial, "Inter", sans-serif; 
+            letter-spacing: -0.02em; 
+        }
+
+        .site-container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1600px; 
+            padding-left: 5vw;
+            padding-right: 5vw;
+        }
+
+        /* MOBILE TOP GAP FIX */
+        @media (max-width: 1023px) {
+            .main-wrapper {
+                padding-top: 4rem !important;
+                display: block; /* Ensures everything stacks properly */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .main-wrapper {
+                display: flex;
+                align-items: flex-start;
+                gap: 2.5rem;
+                padding-top: 0; /* No extra padding needed on desktop */
+            }
+            /* ... rest of your hero-sidebar and projects-feed styles ... */
+
+            .hero-sidebar {
+                position: sticky;
+                top: 0; /* Align to very top so we can use the full 100vh */
+                width: 50%;
+                height: 100vh; /* Lock height to the screen */
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between; /* This pushes footer to bottom */
+                padding-top: 6rem; /* Restores the top air */
+                padding-bottom: 3rem; /* Spacing for the anchored footer */
+            }
+
+            .projects-feed {
+                width: 50%;
+                padding-top: 6rem; /* Keeps feed aligned with the hero text */
+            }
+        }
+
+        /* Card Design from original index_old.html */
+        .project-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        .project-card {
+            transition: all 0.2s ease-in-out;
+            background-color: #FFFFFF;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 0.5px solid rgba(0,0,0,0.05);
+        }
+
+        .project-card:hover {
+            background-color: #EEFFC4;
+            box-shadow: none;
+        }
+
+        .card-title {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            font-weight: 500;
+        }
+
+        .card-description {
+            font-size: clamp(0.85rem, 1vw, 0.95rem);
+            line-height: 1.4;
+            font-weight: 400;
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+<body class="bg-white text-black antialiased">
+
+    <div class="site-container">
+        <div class="main-wrapper">
+            
+            <header class="hero-sidebar mb-20 lg:mb-0">
+                <div>
+                    <h1 style="font-size: var(--font-hero-title);" class="font-bold tracking-tighter mb-4 leading-none">
+                        Hi, I'm <span class="italic font-bold">RAM SALIM</span>
+                    </h1>
+                    <p style="font-size: var(--font-hero-sub);" class="font-normal tracking-tighter leading-[1.05] max-w-xl">
+                        I Specialize in Typography, Illustration, Motion Design & AI Productions, Print & Digital Campaigns
+                    </p>
+                </div>
+
+                <footer class="hidden lg:block opacity-100 text-xs tracking-widest uppercase">
+                    <p>Ram Salim © 2026</p>
+                </footer>
+            </header>
+
+            <main class="projects-feed">
+                <h2 style="font-size: var(--font-section-title);" class="font-bold tracking-tighter mb-10">
+                    Recent Projects
+                </h2>
+
+                <div class="project-grid">
+                    <a href="three-scripts.html" class="project-card block p-7 rounded-2xl">
+                        <div class="flex items-start justify-between mb-3">
+                            <h3 class="text-lg card-title leading-tight">Three Scripts</h3>
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
+                        </div>
+                        <p class="card-description">
+                            An award winning project in experimental typography.
+                        </p>
+                    </a>
+
+                    <a href="tzitzit.html" class="project-card block p-7 rounded-2xl">
+                        <div class="flex items-start justify-between mb-3">
+                            <h3 class="text-lg card-title leading-tight">Tzitzit</h3>
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
+                        </div>
+                        <p class="card-description">
+                            Printed Booklet.
+                        </p>
+                    </a>
+
+                    <a href="alon-livne.html" class="project-card block p-7 rounded-2xl">
+                        <div class="flex items-start justify-between mb-3">
+                            <h3 class="text-lg card-title leading-tight">Alon Livné: Spring 2027</h3>
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
+                        </div>
+                        <p class="card-description">
+                            Editorial Magazine.
+                        </p>
+                    </a>
+
+                    <a href="khilazon.html" class="project-card block p-7 rounded-2xl">
+                        <div class="flex items-start justify-between mb-3">
+                            <h3 class="text-lg card-title leading-tight">Khilazon</h3>
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
+                        </div>
+                        <p class="card-description">
+                            Typeface.
+                        </p>
+                    </a>
+
+
+
+                    <a href="https://khilazon-3d.vercel.app/" class="project-card block p-7 rounded-2xl">
+                        <div class="flex items-start justify-between mb-3">
+                            <h3 class="text-lg card-title leading-tight">Khilazon 3D</h3>
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
+                        </div>
+                        <p class="card-description">
+                            An interactive 3D typeface interface.
+                        </p>
+                    </a>
+
+                    
+
+                    <a href="ishtar.html" class="project-card block p-7 rounded-2xl">
+                        <div class="flex items-start justify-between mb-3">
+                            <h3 class="text-lg card-title leading-tight">Ishtar</h3>
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
+                        </div>
+                        <p class="card-description">
+                            Brand.
+                        </p>
+                    </a>
+
+                    <a href="#" class="project-card block p-7 rounded-2xl">
+                        <div class="flex items-start justify-between mb-3">
+                            <h3 class="text-lg card-title leading-tight">Flower</h3>
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <polyline points="19 12 12 19 5 12"></polyline>
+                            </svg>
+                        </div>
+                        <p class="card-description">
+                            Illustrater comic.
+                        </p>
+                    </a>
+                    
+                </div>
+                <footer class="lg:hidden mt-24 pb-12 opacity-100 text-xs tracking-widest uppercase">
+                    <p>Ram Salim © 2026</p>
+                </footer>
+            </main>
+            
+    </div>
+        </div>
+    </div>
+
+</body>
+</html>
