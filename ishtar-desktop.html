@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        // Instantly redirect phones to mobile
+        if (window.matchMedia("(max-width: 768px)").matches) {
+            window.location.replace("ishtar-mobile.html");
+        }
+    </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ishtar Project</title>
 <link rel="stylesheet" href="ishtar.css">
 <link rel="stylesheet" href="nav.css">
-<script>
-        // Redirect to mobile if window is resized down
-        window.addEventListener('resize', () => {
-            if (window.innerWidth <= 768) {
-                window.location.replace("ishtar-mobile.html");
-            }
-        });
-    </script>
+
 </head>
 <body class="ishtar-page">
 

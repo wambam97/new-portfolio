@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                window.location.replace("ishtar-desktop.html");
-            }
-        });
+        // Instantly redirect desktop screens to desktop
+        if (window.matchMedia("(min-width: 769px)").matches) {
+            window.location.replace("ishtar-desktop.html");
+        }
     </script>
-    <title>ISHTAR - Mobile</title>
-    
+
+    <meta charset="UTF-8">
+    <title>ISHTAR</title>
     <link rel="stylesheet" href="ishtar-mobile.css">
     
 </head>
