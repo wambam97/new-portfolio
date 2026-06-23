@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ISHTAR</title>
+    
     <script>
-        if (window.innerWidth <= 768) {
+        // matchMedia is much more robust on mobile than window.innerWidth
+        if (window.matchMedia("(max-width: 768px)").matches) {
             window.location.replace("ishtar-mobile.html");
         } else {
             window.location.replace("ishtar-desktop.html");
         }
     </script>
 </head>
-<body></body>
+<body style="background: #191616;"></body>
 </html>
