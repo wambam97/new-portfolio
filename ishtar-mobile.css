@@ -44,7 +44,7 @@ body { background-color: var(--bg-dark); color: var(--text-dark); }
     flex-shrink: 0; 
     background: var(--bg-dark); color: var(--text-light); 
     padding: 20px 20px calc(var(--tab-height) + 15px) 20px; 
-    font-size: 0.75rem; 
+    font-size: 0.65rem; 
     text-transform: uppercase;
     line-height: 1.3;
 }
