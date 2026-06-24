@@ -1,3 +1,8 @@
+/* Prevent iOS Safari from auto-scaling text */
+html, body {
+    -webkit-text-size-adjust: 100%;
+}
+
 :root {
     --brand-orange: #F04429;
     --bg-dark: #191616;
@@ -238,7 +243,7 @@ body { background-color: var(--bg-dark); color: var(--text-dark); }
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 1.5rem;
+    gap: 1rem; /* Reduced from 1.5rem */
     transition: transform 0.3s ease-in-out, background-color 0.3s ease; 
     border-bottom: 1px solid #000;
     align-items: baseline;
@@ -251,25 +256,23 @@ body.modal-open .global-header {
 .global-header.nav-hidden {
     transform: translateY(-100%);
 }
+
 .global-header .logo {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 13px; /* Reduced from 16px */
     line-height: 1;
     text-decoration: none;
     color: #111;
     letter-spacing: -0.02em;
 }
+
 .global-header nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem 1rem;
-    font-size: 16px;
+    gap: 0.5rem 0.8rem; /* Reduced from 1rem 1rem */
+    font-size: 13px; /* Reduced from 16px */
     line-height: 1;
     text-transform: uppercase;
-}
-.global-header nav a {
-    text-decoration: none;
-    color: #111;
 }
 
 .hero-container {
