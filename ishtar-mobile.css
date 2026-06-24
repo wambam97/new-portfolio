@@ -16,7 +16,7 @@ body { background-color: var(--bg-dark); color: var(--text-dark); }
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-top: 140px; /* Leave padding-top intact for your nav header clearance */
+    /* padding-top: 140px;  */
 }
 
 .hero {
@@ -130,17 +130,33 @@ body { background-color: var(--bg-dark); color: var(--text-dark); }
     font-weight: 700; font-size: 1rem; white-space: nowrap; 
 }
 
-.symbols-track,
-.brand-seal-section {
+/* Gives the Symbols section its 300vh scroll space so it pauses */
+.symbols-track {
+    height: 300vh;
     position: relative;
 }
+
+.brand-seal-section {
+    position: relative;
+    /* (Height is handled by the inline style in your HTML) */
+}
+
+/* Forces the pinned visual block to fill the mobile screen exactly */
 .sticky-wrapper {
     position: sticky;
     top: 0;
-    display: flex; flex-direction: column;
+    height: 100dvh; /* Uses dynamic viewport height to prevent mobile address bar cutoff */
+    display: flex; 
+    flex-direction: column;
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
     overflow: hidden;
+}
+
+/* Overrides the locked aspect-ratio so the container stretches down to fill the gap */
+.sticky-wrapper .evolution-container {
+    flex-grow: 1;
+    aspect-ratio: auto; 
 }
 
 /* Logo Evolution Box */
@@ -217,7 +233,7 @@ body { background-color: var(--bg-dark); color: var(--text-dark); }
     background-color: #fff;
     color: #111;
     z-index: 1000;
-    padding: 3rem 6vw 1rem 6vw;
+    padding: 2rem 4vw 1rem 4vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -246,7 +262,7 @@ body.modal-open .global-header {
 .global-header nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem 2rem;
+    gap: 1rem 1rem;
     font-size: 16px;
     line-height: 1;
     text-transform: uppercase;
@@ -257,14 +273,14 @@ body.modal-open .global-header {
 }
 
 .hero-container {
-    padding-top: 140px; 
+    padding-top: 80px; 
 }
 
 /* SCOPED MODAL STYLES */
 #projects-modal {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background-color: #e5e5e5; z-index: 990; overflow-y: auto;
-    padding: 160px 6vw 8rem 6vw; 
+    padding: 160px 4vw 8rem 4vw; 
     opacity: 0; visibility: hidden; pointer-events: none;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     color: #111; 

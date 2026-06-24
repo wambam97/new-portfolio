@@ -13,8 +13,8 @@
    px or vw so they're immune to the shrunken rem base. ── */
 :root {
     --nav-gap:    2.5vw;
-    --nav-px:     6vw;
-    --nav-py:     48px;   /* = 3rem at 16px base, px so Ishtar's 0.65vw rem can't shrink it */
+    --nav-px:     4vw;
+    --nav-py:     32px;   /* = 3rem at 16px base, px so Ishtar's 0.65vw rem can't shrink it */
     --nav-pb:     16px;   /* = 1rem at 16px base */
     --nav-mb:     48px;   /* = 3rem at 16px base */
     --nav-fs:     16px;

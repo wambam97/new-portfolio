@@ -441,35 +441,3 @@ b, strong { font-weight: 700; }
   object-fit: cover; /* Stretches the video to fill the width while bounding it to the 100vh height */
   display: block;
 }
-
-/* =========================================
-   ISHTAR HEADER: PERFECT REPLICA
-========================================= */
-header.global-header {
-    position: fixed !important; 
-    top: 0 !important; 
-    left: 0 !important; 
-    width: 100% !important;
-    background-color: #fff !important; /* Force solid white background */
-    border-bottom: 1px solid #000 !important;
-    mix-blend-mode: normal !important; /* REMOVED difference blend */
-    padding: 3rem 6vw 1rem 6vw !important; /* Exact padding from project.css */
-    margin: 0 !important;
-    z-index: 2000 !important;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-header.global-header.nav-hidden {
-    transform: translateY(-100%);
-}
-
-/* Force text and logo to dark gray to match standard pages */
-header.global-header .logo,
-header.global-header nav a {
-    color: #111 !important; 
-}
-
-/* Aggressively kill any extra background elements */
-header.global-header::before {
-    display: none !important;
-}

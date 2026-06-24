@@ -3,8 +3,8 @@
    ========================================= */
 :root {
     --grid-gap: 2.5vw;
-    --page-margin-x: 6vw;
-    --page-margin-y: 3rem;
+    --page-margin-x: 4vw;
+    --page-margin-y: 2rem;
     
     /* Layout Calculation Variables */
     --header-padding-bottom: 1rem;
@@ -109,7 +109,7 @@ body.modal-open header::before {
     nav {
         display: flex;
         flex-wrap: wrap;
-        gap: 1rem 2rem;
+        gap: 1rem 1rem;
     }
 
     body.home-page header::before {
@@ -180,7 +180,8 @@ main {
    TYPOGRAPHY
    ========================================= */
 h1 {
-    font-size: 36px;
+    font-size: 24px;
+    font-weight: 500;
     margin: 0 0 1.5rem 0;
     letter-spacing: -0.04em;
     line-height: 1;
