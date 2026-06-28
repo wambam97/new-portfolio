@@ -107,7 +107,7 @@ body.modal-open header::before {
     :root {
         --nav-font-size: 13px; 
     }
-    
+
     header.grid {
         flex-direction: row;
         flex-wrap: wrap;
@@ -498,4 +498,155 @@ h1 {
 
 body.modal-open {
     overflow: hidden;
+}
+
+/* =========================================
+   SPREAD SLIDER LAYOUT & OVERRIDES
+   ========================================= */
+
+.gallery {
+    grid-column: 3 / 9;
+    grid-row: 1;
+    height: calc(100vh - var(--info-top-offset) - var(--page-margin-y)) !important;
+    position: sticky !important;
+    top: var(--info-top-offset) !important;
+    display: block !important;
+    overflow: hidden;
+}
+
+.gallery-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.gallery-slider img {
+    position: absolute;
+    max-width: none !important;
+    max-height: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    opacity: 0 !important;
+    pointer-events: none;
+    /* transition: opacity 0.4s ease-in-out; */
+}
+
+.gallery-slider img.active {
+    opacity: 1 !important;
+    pointer-events: auto;
+}
+
+/* Hide the old static navigation completely */
+.gallery-nav {
+    display: none !important;
+}
+
+/* Hide default cursor ONLY over the image slider */
+.gallery-slider {
+    cursor: none;
+}
+
+/* Custom Following Cursor */
+#cursor-arrow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #111;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 9999;
+}
+
+#cursor-arrow.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Disable custom cursor on mobile */
+@media (max-width: 900px) {
+    #cursor-arrow { 
+        display: none !important; 
+    }
+    .gallery { 
+        cursor: auto; 
+    }
+}
+
+/* =========================================
+   MOBILE LAYOUT (< 900px)
+   ========================================= */
+@media (max-width: 900px) {
+    .gallery {
+        position: relative !important;
+        top: 0 !important;
+        height: auto !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .gallery-slider {
+        display: flex !important;
+        flex-direction: column !important; /* Stacks images vertically */
+        gap: 1.5rem !important; /* Space between images */
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .gallery-slider img {
+        position: relative !important; /* Removes absolute stacking */
+        width: 100% !important;
+        height: auto !important;
+        opacity: 1 !important; /* Makes all images visible */
+        pointer-events: auto !important;
+        display: block !important;
+    }
+
+    /* Hide desktop navigation and mobile dots */
+    .gallery-nav, 
+    .carousel-dots { 
+        display: none !important; 
+    }
+}
+
+/* Allow scrolling inside the gallery container and hide the scrollbar for a clean look */
+.gallery {
+    overflow-y: auto !important;
+    scrollbar-width: none; /* Firefox */
+}
+.gallery::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+/* Style the video stack */
+.gallery-videos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--grid-gap);
+    margin-top: var(--grid-gap);
+    width: 100%;
+    padding-bottom: 4rem; /* Gives some breathing room at the very bottom */
+}
+
+.gallery-videos video {
+    width: 100%;
+    height: auto;
+    display: block;
+    background-color: #eee;
 }
