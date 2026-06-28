@@ -297,8 +297,8 @@ h1 {
 .cta-button {
     display: inline-block;
     font-family: 'Arbel Hagilda', sans-serif;
-    font-size: 14px;
-    padding: 0.4rem 1rem;
+    font-size: 12px;
+    padding: 0.4rem;
     border: 1px solid #000;
     background: transparent;
     cursor: pointer;
@@ -507,11 +507,11 @@ body.modal-open {
 .gallery {
     grid-column: 3 / 9;
     grid-row: 1;
-    height: calc(100vh - var(--info-top-offset) - var(--page-margin-y)) !important;
+    /* Removed "- var(--page-margin-y)" so it stretches to the absolute bottom */
+    height: calc(100vh - var(--info-top-offset)) !important;
     position: sticky !important;
     top: var(--info-top-offset) !important;
     display: block !important;
-    overflow: hidden;
 }
 
 .gallery-slider {
@@ -649,4 +649,10 @@ body.modal-open {
     height: auto;
     display: block;
     background-color: #eee;
+}
+
+/* Align and style the Hebrew paragraph in the description */
+.hebrew-desc {
+    text-align: right;
+    font-family: 'Arbel Hagilda', sans-serif;
 }
