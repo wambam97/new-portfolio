@@ -268,7 +268,26 @@ window.addEventListener('scroll', () => {
         
         fluidSymbol.style.transform = `scale(${scaleX}, ${scaleY})`;
     }
-});
+    });
+
+    // Force iOS to wake up and play the bottom video when it enters the viewport
+    const bottomVideo = document.querySelector('.applications-gallery video:last-of-type');
+
+    if (bottomVideo) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Video is on screen -> force playback
+                    bottomVideo.play().catch(err => console.log("Playback blocked:", err));
+                } else {
+                    // Video is off screen -> free up hardware decoder memory
+                    bottomVideo.pause();
+                }
+            });
+        }, { threshold: 0.1 });
+
+        observer.observe(bottomVideo);
+    }
     </script>
 
     <script src="main.js"></script>
