@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower - Ram Salim</title>
+    <!-- Link the external stylesheet -->
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+
+    <!-- The external header will be injected here -->
+    <div id="nav-placeholder"></div>
+
+    <main class="grid">
+        <div class="info-pane">
+            <div class="top-content">
+                <h1>Flower</h1>
+                
+                <div class="specs-list">
+                    <span>Illustration</span>
+                    <span>Character Design</span>
+                    <span>Storytelling</span>
+                    <span>Graphic Novel</span>
+                    <span>Social Commentary</span>
+                    <span>Dark Surrealism</span>
+                </div>
+                
+                <div class="description">
+                    <p>Flower is an allegorical short comic that explores power dynamics, transactional morality, and survival in the city. The narrative centers on a confrontation between a restaurant server—who happens to be a bull—and a customer whose advances he rejects. In retaliation, the customer hatches a vengeful scheme alongside the restaurant owner, who willingly complies for a fee.</p>
+                    <p>Drawing from personal experiences as a young man navigating urban spaces, the project serves as a dark visual commentary on the distortion of power, the vulnerability of youth, and the ease with which human capital is commodified by those with means.</p>
+                </div>
+            </div>
+            
+            <div class="copyright desktop-copy">
+                RAM SALIM © 2026
+            </div>
+        </div>
+        
+        <div class="gallery">
+            <div class="gallery-slider">
+                <img src="assets/flower/0.webp" alt="Flower 1" class="active">
+                <img src="assets/flower/1.webp" alt="Flower 2">
+                <img src="assets/flower/2.webp" alt="Flower 3">
+                <img src="assets/flower/3.webp" alt="Flower 4">
+                <img src="assets/flower/4.webp" alt="Flower 5">
+
+                <div class="gallery-nav">
+                    <button id="prev-btn" aria-label="Previous spread">←</button>
+                    <button id="next-btn" aria-label="Next spread">→</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright mobile-copy">
+            RAM SALIM © 2026
+        </div>
+    </main>
+
+    <!-- Script to load the header -->
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').outerHTML = data;
+            })
+            .catch(error => console.error('Error loading the header:', error));
+    </script>
+
+    <script src="main.js"></script>
+</body>
+</html>
