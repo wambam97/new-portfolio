@@ -455,6 +455,51 @@ h1 {
     margin: 0;
     line-height: 1.3;
 }
+/* =========================================
+   MOBILE GRAPHIC SWAP
+   ========================================= */
+.mobile-hero {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .desktop-hero {
+        display: none; /* Hides the video on mobile */
+    }
+    .mobile-hero {
+        display: block; /* Shows the SVG on mobile */
+        width: 100%;
+        max-width: 100%;
+        padding: 0 var(--page-margin-x);
+        object-fit: contain;
+    }
+}
+
+/* =========================================
+   SCROLL SNAPPING (HOMEPAGE ONLY)
+   ========================================= */
+html.home-snap {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+/* Invisible anchor to snap back to the very top (Hero section) */
+body.home-page::before {
+    content: "";
+    display: block;
+    height: 10px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    scroll-snap-align: start;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Snaps the grid page right to the top of the viewport */
+html.home-snap .projects-reveal {
+    scroll-snap-align: start;
+}
 
 /* Homepage Mobile Breakpoint */
 @media (max-width: 900px) {
