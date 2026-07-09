@@ -475,34 +475,6 @@ h1 {
     }
 }
 
-/* =========================================
-   SCROLL SNAPPING (HOMEPAGE DESKTOP ONLY)
-   ========================================= */
-@media (min-width: 901px) {
-    html.home-snap {
-        scroll-snap-type: y mandatory;
-        scroll-behavior: smooth;
-    }
-
-    /* Invisible anchor to snap back to the very top (Hero section) */
-    body.home-page::before {
-        content: "";
-        display: block;
-        height: 10px;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        scroll-snap-align: start;
-        pointer-events: none;
-        z-index: -1;
-    }
-
-    /* Snaps the grid page right to the top of the viewport */
-    html.home-snap .projects-reveal {
-        scroll-snap-align: start;
-    }
-}
-
 /* Homepage Mobile Breakpoint */
 @media (max-width: 900px) {
     .projects-grid {
@@ -516,7 +488,6 @@ h1 {
         padding-bottom: 4rem;
     }
 }
-
 
 /* =========================================
    PROJECTS MODAL 
