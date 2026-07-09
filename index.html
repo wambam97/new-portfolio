@@ -12,11 +12,8 @@
     <div id="nav-placeholder"></div>
 
     <div class="hero-fixed">
-    <video muted playsinline autoplay loop class="hero-placeholder-graphic hero-video">
-        <source src="assets/home/main-title-test4.mp4" media="(min-width: 901px)">
-        <source src="assets/home/main-title-mobile.mp4" media="(max-width: 900px)">
-    </video>
-</div>
+        <video muted playsinline autoplay loop class="hero-placeholder-graphic hero-video"></video>
+    </div>
 
     <!-- Scrollable Projects Section (Home Page Only) -->
     <div class="projects-reveal" id="projects-section">
@@ -26,5 +23,17 @@
 
     <!-- Universal Script -->
     <script src="main.js"></script>
+    
+    <script>
+        const heroVideo = document.querySelector('.hero-video');
+        if (heroVideo) {
+            const isMobile = window.matchMedia('(max-width: 900px)').matches;
+            heroVideo.src = isMobile
+                ? 'assets/home/main-title-mobile.mp4'
+                : 'assets/home/main-title-test4.mp4';
+            heroVideo.load();
+            heroVideo.play().catch(err => console.warn('Autoplay blocked:', err));
+        }
+    </script>
 </body>
 </html>
