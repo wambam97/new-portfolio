@@ -455,25 +455,6 @@ h1 {
     margin: 0;
     line-height: 1.3;
 }
-/* =========================================
-   MOBILE GRAPHIC SWAP
-   ========================================= */
-.mobile-hero {
-    display: none;
-}
-
-@media (max-width: 900px) {
-    .desktop-hero {
-        display: none; /* Hides the video on mobile */
-    }
-    .mobile-hero {
-        display: block; /* Shows the SVG on mobile */
-        width: 100%;
-        max-width: 100%;
-        padding: 0 var(--page-margin-x);
-        object-fit: contain;
-    }
-}
 
 /* =========================================
    SCROLL SNAPPING (HOMEPAGE DESKTOP ONLY)
